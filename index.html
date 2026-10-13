@@ -375,7 +375,7 @@ const METIERS=[
 {label:{fr:'Mobile',en:'Mobile'},gal:'mobile',short:'MOBILE',col:'#7FD6F2',lore:{fr:'L’app Nona en React Native : fond animé sur 45+ écrans, carte des événements, releases Play Store avec Fastlane.',en:'The Nona app in React Native: animated background on 45+ screens, events map, Play Store releases with Fastlane.'},stats:[['React Native',null],['Fastlane',null],['Firebase',null]]},
 {label:{fr:'Backend',en:'Backend'},gal:'backend',short:'BACK',col:'#EDEAF5',lore:{fr:'Un BFF et 10 microservices NestJS reliés par Kafka, avec Redis, PostgreSQL, MongoDB et Stripe, sur un VPS derrière nginx.',en:'A BFF and 10 NestJS microservices connected through Kafka, with Redis, PostgreSQL, MongoDB and Stripe, on a VPS behind nginx.'},stats:[['NestJS',null],['Kafka',null],['Redis',null],['MongoDB',null]]},
 {label:{fr:'Game dev',en:'Game dev'},short:'GAME',col:'#8AB4FF',lore:{fr:'Je crée mes propres jeux. Ce portfolio en est un : moteur, physique et niveaux codés à la main. Unity et C# sont en cours d’apprentissage pour les suivants.',en:'I make my own games. This portfolio is one: engine, physics and levels hand-coded. Unity and C# are next on my learning path.'},stats:[['JavaScript',85],['Game design',null],['Unity',null],['C#',null]]}];
-const NUMS=[[10,'',{fr:'microservices NestJS',en:'NestJS microservices'},'#6FE3C1','SERVICES'],[64,'',{fr:'tests d’intégration au vert',en:'passing integration tests'},'#FFC46B','TESTS'],[12,'',{fr:'routes basculées vers le BFF',en:'routes moved to the BFF'},'#FF8A73','ROUTES'],[45,'+',{fr:'écrans avec fond animé',en:'screens with animated background'},'#8AB4FF',{fr:'ECRANS',en:'SCREENS'}]];
+const NUMS=[[10,'',{fr:'microservices NestJS',en:'NestJS microservices'},'#6FE3C1','SERVICES'],[64,'',{fr:'tests d’intégration au vert',en:'passing integration tests'},'#FFC46B','TESTS'],[12,'',{fr:'routes basculées vers le BFF',en:'routes moved to the BFF'},'#FF8A73','ROUTES'],[45,'+',{fr:'écrans avec fond animé',en:'screens with animated background'},'#8AB4FF',{fr:'ECRANS',en:'SCREENS'}],[4,'',{fr:'stagiaires encadrés',en:'interns mentored'},'#F29BD0',{fr:'EQUIPE',en:'TEAM'}]];
 const RANKS={fr:['Apprenti','Confirmé','Avancé','Expert'],en:['Apprentice','Proficient','Advanced','Expert']};
 const CHAR={
 cls:{fr:'Développeur full-stack · Designer',en:'Full-stack developer · Designer'},
@@ -426,7 +426,7 @@ tree:[
 [{fr:'Moteur de jeu JS',en:'JS game engine'},2,{fr:'Ce portfolio : physique, caméra, météo, sons, tout à la main',en:'This portfolio: physics, camera, weather, sound, all by hand'}],
 ['Unity / C#',0,{fr:'En apprentissage : plateformer 2D, prototype 3D',en:'Learning: 2D platformer, 3D prototype'}]]}],
 talents:[
-[{fr:'Encadrement',en:'Leadership'},{fr:'Encadre des équipes sur Autohub, y compris des profils non techniques',en:'Leads teams on Autohub, including non-technical members'}],
+[{fr:'Encadrement',en:'Leadership'},{fr:'A encadré 4 stagiaires : 3 sur Autohub, 1 sur la stack technique',en:'Mentored 4 interns: 3 on Autohub, 1 on the tech stack'}],
 [{fr:'Chasse aux bugs',en:'Bug hunting'},{fr:'Lit les vrais logs de production plutôt que de supposer',en:'Reads real production logs instead of guessing'}],
 [{fr:'Double regard',en:'Two lenses'},{fr:'Designer et développeur : l’interface et l’architecture vont ensemble',en:'Designer and developer: interface and architecture go together'}]],
 feats:[
@@ -442,7 +442,7 @@ const QUESTS=[
 {tag:'Mobile + backend',gal:'nona',title:'Nona',text:{fr:'Plateforme sociale d’activités et d’événements, publiée sur le Play Store.',en:'Social platform for activities and events, published on the Play Store.'},col:'#7FD6F2'},
 {tag:{fr:'Multimédia',en:'Multimedia'},gal:'design',title:{fr:'Studio créatif',en:'Creative studio'},text:{fr:'Visuels Adobe, photographie de reportage et montage vidéo.',en:'Adobe visuals, documentary photography and video editing.'},col:'#FF8A73'},
 {tag:'Architecture',title:{fr:'BFF et microservices',en:'BFF and microservices'},text:{fr:'10 modules, 64 tests, bascule nginx en production.',en:'10 modules, 64 tests, nginx switchover in production.'},col:'#6FE3C1'},
-{tag:'Lead',title:'Autohub',url:'https://autohub.mg',text:{fr:'Application d’achat, de location et de vente de véhicules à Madagascar, sur iOS, Android et web.',en:'App for buying, renting and selling vehicles in Madagascar, on iOS, Android and web.'},more:[{fr:'Backend Strapi v3 et Node.js : maintenance et évolutions',en:'Strapi v3 and Node.js backend: maintenance and new features'},{fr:'Migration du déploiement de Docker Compose vers PM2',en:'Deployment migrated from Docker Compose to PM2'},{fr:'App mobile : inscription avec acceptation des CGU et CGV',en:'Mobile app: sign-up with terms and conditions acceptance'},{fr:'Encadrement d’équipes, y compris des profils non techniques',en:'Leading teams, including non-technical members'}],col:'#FFC46B'},
+{tag:'Lead',title:'Autohub',url:'https://autohub.mg',text:{fr:'Application d’achat, de location et de vente de véhicules à Madagascar, sur iOS, Android et web. Équipe de 3 stagiaires encadrée.',en:'App for buying, renting and selling vehicles in Madagascar, on iOS, Android and web. Led a team of 3 interns.'},more:[{fr:'Backend Strapi v3 et Node.js : maintenance et évolutions',en:'Strapi v3 and Node.js backend: maintenance and new features'},{fr:'Migration du déploiement de Docker Compose vers PM2',en:'Deployment migrated from Docker Compose to PM2'},{fr:'App mobile : inscription avec acceptation des CGU et CGV',en:'Mobile app: sign-up with terms and conditions acceptance'},{fr:'Encadrement de 3 stagiaires sur Autohub, et d’un 4e sur la stack technique',en:'Mentored 3 interns on Autohub, plus a 4th on the tech stack'}],col:'#FFC46B'},
 {tag:{fr:'Automatisation',en:'Automation'},title:{fr:'Candidatures auto',en:'Auto job applications'},text:{fr:'Envoi de CV et de candidatures via l’API Gmail, en Python.',en:'Sending resumes and applications through the Gmail API, in Python.'},col:'#F29BD0'},
 {tag:{fr:'Jeu',en:'Game'},title:'Bug Runner',text:{fr:'Mon premier mini-jeu de plateforme : saute les bugs, ramasse les commits. Ce monde en est la suite.',en:'My first platformer mini-game: jump over bugs, collect commits. This world is its sequel.'},col:'#8AB4FF'}];
 const STEPS=[
@@ -507,7 +507,7 @@ add({type:'arch',x:860,gi:0,col:'#FFC46B',deco:true});
 METIERS.forEach((m,i)=>add({type:'kiosk',x:1040+i*200,m:m,r:46,label:'pRead'}));
 add({type:'arch',x:2480,gi:1,col:'#7FD6F2',deco:true});
 add({type:'nona',x:2760,r:120,label:'pEnter'});
-NUMS.forEach((n,i)=>add({type:'pillar',x:3010+i*96,n:n,deco:true}));
+NUMS.forEach((n,i)=>add({type:'pillar',x:2970+i*82,n:n,deco:true}));
 add({type:'arch',x:3480,gi:2,col:'#F29BD0',deco:true});
 const plats=[];
 QUESTS.forEach((q,i)=>{const x=3660+i*220;const high=i===1||i===4;if(high)plats.push({x:x-60,w:120,y:228});add({type:'chest',x:x,y:high?228:GY,q:q,r:40,label:'pOpen',open:false});});
@@ -524,7 +524,7 @@ const coins=[];
 [[560,0],[620,0],[680,0],[1940,1],[2380,0],[2440,0],[3700,2],[3880,3],[3940,3],[4100,2],[4560,2],[4600,3],[5540,4],[5580,4],[5780,5],[5820,5],[5380,1],[5980,1],[6560,0],[6620,0],[6880,1],[7320,0]].forEach((c)=>{const ys=[GY-40,GY-90,GY-40,GY-130,GY-120,GY-140];coins.push({x:c[0],y:ys[c[1]],got:false,ph:rnd()*6});});
 const bugs=[[2100,2000,2250],[4220,4150,4420],[5300,5240,5480],[5650,5560,5720],[5900,5840,6040],[6720,6650,6850]].map((b)=>({x:b[0],a:b[1],b:b[2],dir:-1,alive:true,sq:0}));
 const hero={x:120,y:GY,vx:0,vy:0,ground:true,face:1,runT:0,inv:0,land:0,waveT:0};let lastNear=null,saveT=0,doneShown=false;
-const DECO=[['raven',500],['baobab',650],['baobab',2360],['raven',2940],['baobab',3380],['raven',5960],['baobab',6050],['raven',7600]];
+const DECO=[['raven',500],['baobab',650],['baobab',2360],['raven',2940],['baobab',3372],['raven',5960],['baobab',6050],['raven',7600]];
 const NPCS=[{k:'villager',x:760,lines:'npcVillager',face:-1},{k:'zebu',x:4905,lines:'npcZebu',face:-1,s:0.66}];NPCS.forEach((n)=>{n.li=0;n.chars=0;n.t=0;n.near=false;});
 const lemur={joined:false,x:230,y:GY,vy:0,face:1,t:0,sitX:230};
 const ACH=['explorer','collector','debugger','friend','secret','traveler','polyglot','speedrun'];let achs=new Set(),playTime=0,langsPlayed=new Set(),finishT=0,bestT=0;try{bestT=+localStorage.getItem('haritiana-best')||0;}catch(e){}
