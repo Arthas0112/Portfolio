@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="canonical" href="https://haritiana.is-a.dev/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Haritiana Ranaivojaona", "jobTitle": "Full-stack developer and designer", "url": "https://haritiana.is-a.dev/", "image": "https://haritiana.is-a.dev/og.png", "address": {"@type": "PostalAddress", "addressLocality": "Antananarivo", "addressCountry": "MG"}, "sameAs": ["https://github.com/Arthas0112", "https://www.linkedin.com/in/haritiana-fanomezana-ranaivojaona-4a31b4239"], "knowsAbout": ["React Native", "React", "NestJS", "Microservices", "Kafka", "Redis", "PostgreSQL", "MongoDB", "UI/UX design", "Adobe Photoshop", "Adobe Illustrator"]}</script>
 <title>Haritiana, le portfolio jouable</title>
 <meta name="description" content="Portfolio jouable de Haritiana, développeur full-stack et designer : explore un monde en pixel art pour découvrir ses métiers, ses projets et son parcours.">
 <meta property="og:type" content="website">
@@ -133,6 +135,22 @@ a{color:var(--mint)}
 footer{text-align:center;color:var(--muted);font-size:13px;padding:24px 16px 40px}
 @media (max-width:560px){.hud .box{font-size:11px;padding:4px 7px}.xpbar{width:56px}.stat{grid-template-columns:100px 1fr 40px}.nums{grid-template-columns:1fr 1fr}.map{width:80%;bottom:6px}.top .btn{padding:0 12px}}
 .stage{container-type:size}
+.quickbtn{margin-top:10px;width:100%;border-style:dashed;color:var(--gold)}
+.quick{width:min(760px,calc(100vw - 24px));max-height:calc(100vh - 24px);padding:0;border:2px solid #2B2645;border-radius:16px;background:var(--panel);color:var(--fg);box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.quick::backdrop{background:rgba(8,6,16,.78)}
+.quick .qin{padding:22px 24px 24px}
+.quick h2{font-family:var(--display);font-weight:800;font-size:clamp(26px,4vw,36px);line-height:1.1;margin:4px 0 4px}
+.quick .role{color:var(--muted);margin:0 0 12px;font-weight:700}
+.quick h3{font-family:var(--pixel);font-size:12px;color:var(--gold);letter-spacing:.5px;margin:18px 0 8px;font-weight:400}
+.quick .qnums{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
+.quick .qnums div{background:var(--panel2);border-radius:10px;padding:10px 12px}
+.quick .qnums b{display:block;font-family:var(--pixel);font-size:22px;line-height:1.1}
+.quick .qnums span{font-size:13px;color:var(--muted)}
+.quick .qproj{display:grid;gap:8px}
+.quick .qproj div{border-left:4px solid var(--c);background:var(--panel2);border-radius:8px;padding:10px 12px}
+.quick .qproj strong{display:block}
+.quick .qproj span{font-size:14px;color:var(--muted)}
+.quick .row{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
 .zone:empty{visibility:hidden}
 .loadbar{position:absolute;left:50%;bottom:40px;transform:translateX(-50%);z-index:20;width:min(280px,64%);padding:8px 12px 7px;background:rgba(18,15,30,.9);border:2px solid #2B2645;border-radius:10px;font-family:var(--pixel);font-size:11px;color:var(--gold);text-align:center;transition:opacity .5s;pointer-events:none}
 .loadbar i{display:block;height:10px;background:#1A1729;border:2px solid #2B2645;border-radius:3px;margin-bottom:5px;position:relative;overflow:hidden}
@@ -149,7 +167,7 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:24px 16px 40p
 </style>
 <div class="top">
 <span class="brand" data-t="brand">HARITIANA</span>
-<div class="tools"><button class="btn lang" id="langBtn" type="button">EN</button><button class="btn" id="snd" type="button" aria-pressed="true">Son : oui</button><button class="btn" id="mus" type="button" aria-pressed="false">Musique : non</button><button class="btn" id="fsBtn" type="button" hidden>Plein écran</button><a class="btn" id="cvTop" href="cv/Haritiana_Ranaivojaona_CV.pdf" target="_blank" rel="noopener" data-t="cv">Mon CV</a><a class="btn" href="#classique" data-t="classic">Mode classique</a></div>
+<div class="tools"><button class="btn lang" id="langBtn" type="button">EN</button><button class="btn" id="snd" type="button" aria-pressed="true">Son : oui</button><button class="btn" id="mus" type="button" aria-pressed="false">Musique : non</button><button class="btn" id="fsBtn" type="button" hidden>Plein écran</button><button class="btn" id="quickTop" type="button" data-t="quickTop">En bref</button><a class="btn" id="cvTop" href="cv/Haritiana_Ranaivojaona_CV.pdf" target="_blank" rel="noopener" data-t="cv">Mon CV</a><a class="btn" href="#classique" data-t="classic">Mode classique</a></div>
 </div>
 <div class="wrapgame" id="wrapgame">
 <div class="stage" id="stage">
@@ -172,7 +190,7 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:24px 16px 40p
 <span class="kbd" data-t="kKeysJump"></span><span data-t="kJump"></span>
 <span class="kbd" data-t="kKeysAct"></span><span data-t="kAct"></span>
 </div>
-<div class="row"><button class="btn primary" id="play" type="button"></button><button class="btn" id="restart" type="button" hidden data-t="restart"></button><a class="btn" href="#classique" data-t="seeClassic"></a></div>
+<div class="row"><button class="btn primary" id="play" type="button"></button><button class="btn" id="restart" type="button" hidden data-t="restart"></button><a class="btn" href="#classique" data-t="seeClassic"></a></div><button class="btn quickbtn" id="quickIntro" type="button" data-t="quickBtn"></button>
 </div>
 </div>
 <div class="overlay" id="end" hidden>
@@ -228,14 +246,15 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:24px 16px 40p
 <figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure>
 <button class="btn nav" id="lbNext" type="button" data-t-aria="lbNext" style="right:12px">▶</button>
 </div>
+<dialog class="quick" id="quick" aria-labelledby="qName"><div class="qin" id="qBody"></div></dialog>
 <footer data-t="footer"></footer>
 <script>
 (function(){
 const IMG={hero:'sprites/hero.webp',run:'sprites/hero-run.webp',idle:'sprites/hero-idle.webp',jump:'sprites/hero-jump.webp',bug:'sprites/bug.webp',bugw:'sprites/bug-walk.webp',coin:'sprites/coin.webp',coins:'sprites/coin-spin.webp',nona:'sprites/nona.webp',sky:'sprites/bg-sky.webp',mount:'sprites/bg-mount.webp',hills:'sprites/bg-hills.webp',chestOpen:'sprites/chest-open.webp',wave:'sprites/hero-wave.webp',chest:'sprites/chest.webp',sign:'sprites/sign.webp',house:'sprites/house.webp',plat:'sprites/platform.webp',pillar:'sprites/pillar.webp',flag:'sprites/flag.webp',raven:'sprites/ravenala.webp',baobab:'sprites/baobab.webp',gate:'sprites/gate.webp',welcome:'sprites/welcome.webp',arcade:'sprites/arcade.webp',lemur:'sprites/lemur.webp',lemurRun:'sprites/lemur-run.webp',lemurIdle:'sprites/lemur-idle.webp',sun:'sprites/sun.webp',moon:'sprites/moon.webp',storm:'sprites/storm.webp',zebuIdle:'sprites/zebu-idle.webp',flagA:'sprites/flag-anim.webp',nonaA:'sprites/nona-anim.webp',arcadeA:'sprites/arcade-anim.webp',villagerIdle:'sprites/villager-idle.webp',zebu:'sprites/zebu.webp',villager:'sprites/villager.webp',fg:'sprites/fg-foliage.webp',ground:'sprites/ground.webp',jungle:'sprites/bg-jungle.webp',flowers:'sprites/flowers.webp'};
-const EMAIL='rhartiana.fanomezana@gmail.com',FORMSPREE='mljgwyyp',GH='https://github.com/haritiana',LI='https://www.linkedin.com/in/haritiana-fanomezana-ranaivojaona-4a31b4239';
+const EMAIL='rhartiana.fanomezana@gmail.com',FORMSPREE='mljgwyyp',GH='https://github.com/Arthas0112',LI='https://www.linkedin.com/in/haritiana-fanomezana-ranaivojaona-4a31b4239';
 const CVFR='cv/Haritiana_Ranaivojaona_CV.pdf',CVEN='cv/Haritiana_Ranaivojaona_Resume.pdf';
 const T={
-fr:{brand:'HARITIANA',sndOn:'Son : oui',sndOff:'Son : non',musOn:'Musique : oui',musOff:'Musique : non',cv:'Mon CV',classic:'Mode classique',full:'Plein écran',fullExit:'Quitter le plein écran',lang:'EN',langLabel:'Switch to English',
+fr:{brand:'HARITIANA',quickBtn:'Pressé ? Version 30 s',quickTop:'En bref',qTag:'Version express',qRole:'Développeur full-stack et designer · Antananarivo, Madagascar',qPitch:'Je conçois et développe des produits de bout en bout : application mobile React Native, back-office web, API et microservices NestJS, jusqu’au déploiement en production. Avec 5 ans de design derrière moi, je soigne autant l’interface que l’architecture.',qNums:'En chiffres',qProjects:'Projets clés',qStack:'Stack',qPlay:'Jouer quand même',qClassic:'Tout lire en détail',qContact:'Me contacter',sndOn:'Son : oui',sndOff:'Son : non',musOn:'Musique : oui',musOff:'Musique : non',cv:'Mon CV',classic:'Mode classique',full:'Plein écran',fullExit:'Quitter le plein écran',lang:'EN',langLabel:'Switch to English',
 canvas:'Monde en pixel art du portfolio de Haritiana. Utilise les flèches pour avancer, Espace pour sauter, E pour interagir. Tout le contenu est aussi disponible dans le mode classique sous le jeu.',
 introTag:'Portfolio jouable',introTitle:'Salut, moi c’est Haritiana',introText:'Développeur full-stack et designer. Mon portfolio est un petit jeu : avance dans le monde et approche-toi des panneaux, coffres et drapeaux pour découvrir mon travail.',
 kMove:'Avancer et reculer',kJump:'Sauter (et écraser les bugs)',kAct:'Lire, ouvrir, interagir',kKeysMove:'← → / Q D',kKeysJump:'Espace / ↑',kKeysAct:'E / Entrée',
@@ -263,7 +282,7 @@ aTag:'Bonus',aP1:'Mon premier mini-jeu : saute les bugs, ramasse les commits. Ce
 mTag:'Fin de partie',mTitle:'On travaille ensemble ?',mText:'Tu as exploré {f} lieux sur {n} et ramassé {c} commits. Pour un projet, un poste ou juste un échange :',
 sTag:'Coffre secret',sTitle:'Les coulisses',sText:'Bravo, tu as ramassé tous les commits ! Quelques choses qu’on ne voit pas dans un CV :',
 sFacts:['Je parle français et anglais couramment, et je suis certifié TESOL/TEFL pour enseigner l’anglais.','En dehors du code : scoutisme, photographie et bénévolat associatif.','Ce jeu : un moteur écrit à la main, sans librairie, plus de 30 sprites générés avec SpriteCook et des bruitages synthétisés en direct.','Mes premiers pas en dev : un BTS Multimédia, puis une formation intensive chez Inclusiv Academy.']},
-en:{brand:'HARITIANA',sndOn:'Sound: on',sndOff:'Sound: off',musOn:'Music: on',musOff:'Music: off',cv:'Resume',classic:'Classic view',full:'Full screen',fullExit:'Exit full screen',lang:'FR',langLabel:'Passer en français',
+en:{brand:'HARITIANA',quickBtn:'In a hurry? 30-second version',quickTop:'At a glance',qTag:'Quick version',qRole:'Full-stack developer and designer · Antananarivo, Madagascar',qPitch:'I design and build products end to end: React Native mobile app, web back office, NestJS API and microservices, all the way to production. With 5 years of design behind me, I care as much about the interface as the architecture.',qNums:'In numbers',qProjects:'Key projects',qStack:'Stack',qPlay:'Play anyway',qClassic:'Read everything',qContact:'Contact me',sndOn:'Sound: on',sndOff:'Sound: off',musOn:'Music: on',musOff:'Music: off',cv:'Resume',classic:'Classic view',full:'Full screen',fullExit:'Exit full screen',lang:'FR',langLabel:'Passer en français',
 canvas:'Pixel art world of Haritiana’s portfolio. Use the arrow keys to move, Space to jump, E to interact. All the content is also available in the classic view below the game.',
 introTag:'Playable portfolio',introTitle:'Hi, I’m Haritiana',introText:'Full-stack developer and designer. My portfolio is a small game: walk through the world and get close to signs, chests and flags to discover my work.',
 kMove:'Move left and right',kJump:'Jump (and squash bugs)',kAct:'Read, open, interact',kKeysMove:'← → / A D',kKeysJump:'Space / ↑',kKeysAct:'E / Enter',
@@ -471,15 +490,21 @@ const hadSave=load();
 function playUI(){playBtn.textContent=hadSave?tr('cont')+' · '+found.size+'/'+INTER.length:tr('play');}
 if(hadSave){const rb=document.getElementById('restart');rb.hidden=false;rb.addEventListener('click',()=>{resetGame();start();});}
 playBtn.addEventListener('click',start);
+const quick=document.getElementById('quick'),qBody=document.getElementById('qBody');
+function quickHTML(){const nums=NUMS.map((n)=>'<div><b style="color:'+n[3]+'">'+n[0]+n[1]+'</b><span>'+esc(L(n[2]))+'</span></div>').join('');const pj=QUESTS.map((q)=>'<div style="--c:'+q.col+'"><strong>'+esc(L(q.title))+'</strong><span>'+esc(L(q.text))+'</span></div>').join('');const st=STACK.map((s)=>'<span class="chip">'+esc(s)+'</span>').join('');return '<button class="x" type="button" data-q="close">'+esc(tr('close'))+'</button><p class="tag" style="color:var(--gold)">'+esc(tr('qTag'))+'</p><h2 id="qName">Haritiana Ranaivojaona</h2><p class="role">'+esc(tr('qRole'))+'</p><p>'+esc(tr('qPitch'))+'</p><h3>'+esc(tr('qNums')).toUpperCase()+'</h3><div class="qnums">'+nums+'</div><h3>'+esc(tr('qProjects')).toUpperCase()+'</h3><div class="qproj">'+pj+'</div><h3>'+esc(tr('qStack')).toUpperCase()+'</h3><div class="chips">'+st+'</div><div class="row">'+cvButtons()+'<a class="btn primary" href="mailto:'+EMAIL+'">'+esc(tr('qContact'))+'</a><a class="btn" href="'+LI+'" target="_blank" rel="noopener">LinkedIn</a><a class="btn" href="'+GH+'" target="_blank" rel="noopener">GitHub</a></div><div class="row"><button class="btn" type="button" data-q="play">'+esc(tr('qPlay'))+'</button><button class="btn" type="button" data-q="classic">'+esc(tr('qClassic'))+'</button></div>';}
+function openQuick(){qBody.innerHTML=quickHTML();if(quick.showModal)quick.showModal();else quick.setAttribute('open','');const c=qBody.querySelector('[data-q=close]');if(c)c.focus();}
+function closeQuick(){if(quick.close)quick.close();else quick.removeAttribute('open');}
+document.getElementById('quickIntro').addEventListener('click',openQuick);document.getElementById('quickTop').addEventListener('click',openQuick);
+quick.addEventListener('click',(e)=>{if(e.target===quick){closeQuick();return;}const b=e.target.closest('[data-q]');if(!b)return;const a=b.getAttribute('data-q');closeQuick();if(a==='play')start();if(a==='classic')document.getElementById('classique').scrollIntoView({behavior:reduce?'auto':'smooth'});});
 const langBtn=document.getElementById('langBtn');
-function applyLang(){document.documentElement.lang=LANG;document.title=LANG==='en'?'Haritiana, the playable portfolio':'Haritiana, le portfolio jouable';
+function applyLang(){const qd=document.getElementById('quick');if(qd&&qd.open)document.getElementById('qBody').innerHTML=quickHTML();document.documentElement.lang=LANG;document.title=LANG==='en'?'Haritiana, the playable portfolio':'Haritiana, le portfolio jouable';
 document.querySelectorAll('[data-t]').forEach((el)=>{el.textContent=tr(el.dataset.t);});document.querySelectorAll('[data-t-aria]').forEach((el)=>{el.setAttribute('aria-label',tr(el.dataset.tAria));});
 langBtn.textContent=tr('lang');langBtn.setAttribute('aria-label',tr('langLabel'));document.getElementById('cvTop').href=cvHref();document.querySelectorAll('.cvlink').forEach((a)=>a.href=cvHref());
 sndUI();musUI();fsUI();playUI();renderClassic();mapAria();zoneName='';hud();if(started){langsPlayed.add(LANG);checkAch();}if(openObj)pbody.innerHTML=panelHTML(openObj);if(!lb.hidden)showLB();}
 langBtn.addEventListener('click',()=>{LANG=LANG==='fr'?'en':'fr';try{localStorage.setItem('haritiana-lang',LANG);}catch(e){}applyLang();});
 applyLang();
 const KM={ArrowLeft:'left',KeyA:'left',KeyQ:'left',ArrowRight:'right',KeyD:'right',ArrowUp:'jump',KeyW:'jump',KeyZ:'jump',Space:'jump',KeyE:'act',Enter:'act'};
-window.addEventListener('keydown',(e)=>{if(!lb.hidden){if(['Escape','ArrowRight','ArrowLeft'].indexOf(e.code)>=0)e.preventDefault();if(e.code==='Escape')closeLB();if(e.code==='ArrowRight')stepLB(1);if(e.code==='ArrowLeft')stepLB(-1);return;}if(!endEl.hidden){if(e.code==='Escape'){e.preventDefault();hideEnd();}return;}if(!panel.hidden){if(e.code==='Escape'){e.preventDefault();closePanel();}return;}
+window.addEventListener('keydown',(e)=>{if(quick.open)return;if(!lb.hidden){if(['Escape','ArrowRight','ArrowLeft'].indexOf(e.code)>=0)e.preventDefault();if(e.code==='Escape')closeLB();if(e.code==='ArrowRight')stepLB(1);if(e.code==='ArrowLeft')stepLB(-1);return;}if(!endEl.hidden){if(e.code==='Escape'){e.preventDefault();hideEnd();}return;}if(!panel.hidden){if(e.code==='Escape'){e.preventDefault();closePanel();}return;}
 const k=KM[e.code];if(!k)return;const tg=e.target;if(tg&&tg.closest&&tg.closest('a,button')&&(e.code==='Enter'||e.code==='Space'))return;const r=document.getElementById('stage').getBoundingClientRect();if(r.bottom<0||r.top>window.innerHeight)return;
 if(!started){if(k==='act'||k==='jump'){e.preventDefault();start();}return;}
 e.preventDefault();if(!e.repeat){if(k==='act')actQ=true;if(k==='jump')jumpQ=true;}keys[k]=true;});
