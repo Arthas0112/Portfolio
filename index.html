@@ -493,7 +493,7 @@ function bubble(cx,by,full,shown){const lines=wrapText(full,150);const w=Math.mi
 function drawLayer(img,f,y){const w=img.width;let x=-((camX*f)%w);if(x>0)x-=w;for(;x<W;x+=w)ctx.drawImage(img,Math.round(x),y||0);}
 function text(s,x,y,size,col,align,shadow){ctx.font=size+'px Silkscreen, monospace';ctx.textAlign=align||'center';ctx.textBaseline='middle';if(shadow){ctx.fillStyle=shadow;ctx.fillText(s,Math.round(x)+1,Math.round(y)+1);}ctx.fillStyle=col;ctx.fillText(s,Math.round(x),Math.round(y));}
 function plaque(x,y,w,h){px(ctx,x,y,w,h,'rgba(20,16,32,0.72)');px(ctx,x,y,w,1,'rgba(237,234,245,0.25)');}
-function drawChest(sx,y,open,ot,col,alpha){ctx.globalAlpha=alpha||1;if(ok('chestOpen')){const f=open?Math.min(7,Math.floor((ot||0)*12)):0;ctx.drawImage(imgs.chestOpen,f*108,0,108,108,sx-27,y-54,54,54);}else if(ok('chest'))ctx.drawImage(imgs.chest,sx-24,y-44,48,48);ctx.globalAlpha=1;}
+const CHS=54;function drawChest(sx,y,open,ot,col,alpha){ctx.globalAlpha=alpha||1;if(ok('chestOpen')){const im=imgs.chestOpen,fs=im.height,nf=Math.max(1,Math.round(im.width/fs)),f=open?Math.min(nf-1,Math.floor((ot||0)*12)):0;ctx.drawImage(im,f*fs,0,fs,fs,sx-CHS/2,y-CHS,CHS,CHS);}else if(ok('chest'))ctx.drawImage(imgs.chest,sx-24,y-44,48,48);ctx.globalAlpha=1;}
 function drawObj(o,sx){const g=GY;
 if(o.type==='welcome'){if(ok('welcome')){ctx.drawImage(imgs.welcome,sx-92,g-132);text('HARITIANA',sx,g-96,16,'#2A1206',0,'#E9B57E');text(tr('signSub'),sx,g-74,8,'#3A1C0A');text(tr('signGo'),sx,g-58,8,'#0F5A44');}}
 if(o.type==='arch'){if(ok('gate')){ctx.drawImage(imgs.gate,sx-90,g-120);const pr=tr('gates')[o.gi].split(' · ');text(pr[0],sx,g-99,8,o.col,0,'#2A1608');text(pr[1]||'',sx,g-87,8,'#FFF4E0',0,'#2A1608');}}
