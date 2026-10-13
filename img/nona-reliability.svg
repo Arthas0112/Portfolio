@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" width="1200" height="760" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif">
+<rect width="1200" height="760" fill="#14122A"/>
+<text x="40" y="58" fill="#EDEAF5" font-size="30" font-weight="800">Ce que j'ai résolu en production</text>
+<text x="40" y="86" fill="#B9B4CC" font-size="16">Six chantiers concrets sur Nona, côté fiabilité, sécurité et performance.</text>
+<g font-size="15">
+<rect x="40" y="114" width="550" height="190" rx="16" fill="#1E1B2C" stroke="#FF8A73" stroke-width="2"/>
+<text x="64" y="150" fill="#FF8A73" font-size="13" font-weight="800">SÉCURITÉ</text>
+<text x="64" y="180" fill="#EDEAF5" font-size="20" font-weight="800">Audit des routes internes</text>
+<text x="64" y="210" fill="#B9B4CC">Chaque route inter-services protégée par une garde,</text>
+<text x="64" y="232" fill="#B9B4CC">jetons de service unifiés entre les 10 services,</text>
+<text x="64" y="254" fill="#B9B4CC">accès aux bases limité au réseau interne.</text>
+<rect x="610" y="114" width="550" height="190" rx="16" fill="#1E1B2C" stroke="#6FE3C1" stroke-width="2"/>
+<text x="634" y="150" fill="#6FE3C1" font-size="13" font-weight="800">TEMPS RÉEL</text>
+<text x="634" y="180" fill="#EDEAF5" font-size="20" font-weight="800">Modération instantanée</text>
+<text x="634" y="210" fill="#B9B4CC">Un compte banni depuis le superadmin est déconnecté</text>
+<text x="634" y="232" fill="#B9B4CC">tout de suite via Socket.io ; un contenu retiré</text>
+<text x="634" y="254" fill="#B9B4CC">disparaît en direct des fils des utilisateurs.</text>
+<rect x="40" y="324" width="550" height="190" rx="16" fill="#1E1B2C" stroke="#FFC46B" stroke-width="2"/>
+<text x="64" y="360" fill="#FFC46B" font-size="13" font-weight="800">MONITORING</text>
+<text x="64" y="390" fill="#EDEAF5" font-size="20" font-weight="800">13 règles d'alerte Grafana</text>
+<text x="64" y="420" fill="#B9B4CC">Alertes par email pour être prévenu avant les</text>
+<text x="64" y="442" fill="#B9B4CC">utilisateurs : disponibilité, erreurs HTTP,</text>
+<text x="64" y="464" fill="#B9B4CC">latence, mémoire, infrastructure et Kafka.</text>
+<rect x="610" y="324" width="550" height="190" rx="16" fill="#1E1B2C" stroke="#8AB4FF" stroke-width="2"/>
+<text x="634" y="360" fill="#8AB4FF" font-size="13" font-weight="800">COHÉRENCE DES DONNÉES</text>
+<text x="634" y="390" fill="#EDEAF5" font-size="20" font-weight="800">Suppression de compte propre</text>
+<text x="634" y="420" fill="#B9B4CC">Un événement Kafka user.deleted déclenche le</text>
+<text x="634" y="442" fill="#B9B4CC">nettoyage asynchrone dans 5 services, sans</text>
+<text x="634" y="464" fill="#B9B4CC">ralentir la réponse à l'utilisateur.</text>
+<rect x="40" y="534" width="550" height="190" rx="16" fill="#1E1B2C" stroke="#F29BD0" stroke-width="2"/>
+<text x="64" y="570" fill="#F29BD0" font-size="13" font-weight="800">PERFORMANCE MOBILE</text>
+<text x="64" y="600" fill="#EDEAF5" font-size="20" font-weight="800">Une app plus légère</text>
+<text x="64" y="630" fill="#B9B4CC">R8 et ProGuard resserrés : 5 098 classes supprimées,</text>
+<text x="64" y="652" fill="#B9B4CC">images mortes retirées, miniatures WebP 160/480/1080 px</text>
+<text x="64" y="674" fill="#B9B4CC">pensées pour la 3G de Madagascar.</text>
+<rect x="610" y="534" width="550" height="190" rx="16" fill="#1E1B2C" stroke="#7FD6F2" stroke-width="2"/>
+<text x="634" y="570" fill="#7FD6F2" font-size="13" font-weight="800">LIVRAISON</text>
+<text x="634" y="600" fill="#EDEAF5" font-size="20" font-weight="800">Release en une commande</text>
+<text x="634" y="630" fill="#B9B4CC">Lane Fastlane full_release : APK + AAB, Firebase</text>
+<text x="634" y="652" fill="#B9B4CC">App Distribution, Play Store et tag git, avec un</text>
+<text x="634" y="674" fill="#B9B4CC">mode équipe pour tester avant la mise en ligne.</text>
+</g>
+</svg>

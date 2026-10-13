@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 780" width="1200" height="780" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif">
+<defs>
+<marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8C86AE"/></marker>
+<marker id="k" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#FFC46B"/></marker>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1B1838"/><stop offset="1" stop-color="#120F24"/></linearGradient>
+</defs>
+<rect width="1200" height="780" fill="url(#bg)"/>
+<text x="40" y="56" fill="#EDEAF5" font-size="30" font-weight="800">Nona, sous le capot</text>
+<text x="40" y="84" fill="#B9B4CC" font-size="16">Architecture que j'ai construite et que je maintiens : du téléphone jusqu'aux bases de données.</text>
+<g font-size="15">
+<rect x="40" y="120" width="250" height="96" rx="14" fill="#262238" stroke="#7FD6F2" stroke-width="2"/>
+<text x="62" y="152" fill="#7FD6F2" font-weight="800" font-size="17">App mobile</text>
+<text x="62" y="176" fill="#EDEAF5">React Native · Android</text>
+<text x="62" y="198" fill="#B9B4CC" font-size="13">Socket.io temps réel · Fastlane</text>
+<rect x="40" y="240" width="250" height="96" rx="14" fill="#262238" stroke="#F29BD0" stroke-width="2"/>
+<text x="62" y="272" fill="#F29BD0" font-weight="800" font-size="17">Superadmin</text>
+<text x="62" y="296" fill="#EDEAF5">TanStack Start · React 19</text>
+<text x="62" y="318" fill="#B9B4CC" font-size="13">shadcn/ui · recharts · i18n FR/EN</text>
+<rect x="40" y="360" width="250" height="78" rx="14" fill="#262238" stroke="#FFC46B" stroke-width="2"/>
+<text x="62" y="392" fill="#FFC46B" font-weight="800" font-size="17">Site vitrine</text>
+<text x="62" y="416" fill="#EDEAF5">React · Tailwind · Framer Motion</text>
+<rect x="360" y="240" width="190" height="96" rx="14" fill="#2A2350" stroke="#F29BD0" stroke-width="2"/>
+<text x="382" y="272" fill="#F29BD0" font-weight="800" font-size="17">nona-bff</text>
+<text x="382" y="296" fill="#EDEAF5">NestJS · 10 modules</text>
+<text x="382" y="318" fill="#B9B4CC" font-size="13">cookie httpOnly · 64 tests</text>
+<rect x="610" y="120" width="120" height="420" rx="14" fill="#1E3A3A" stroke="#6FE3C1" stroke-width="2"/>
+<text x="670" y="300" fill="#6FE3C1" font-weight="800" font-size="18" text-anchor="middle">nginx</text>
+<text x="670" y="324" fill="#EDEAF5" text-anchor="middle" font-size="13">passerelle</text>
+<text x="670" y="344" fill="#B9B4CC" text-anchor="middle" font-size="13">SSL · routage</text>
+<line x1="290" y1="168" x2="606" y2="168" stroke="#8C86AE" stroke-width="2" marker-end="url(#a)"/>
+<line x1="290" y1="288" x2="356" y2="288" stroke="#8C86AE" stroke-width="2" marker-end="url(#a)"/>
+<line x1="550" y1="288" x2="606" y2="288" stroke="#8C86AE" stroke-width="2" marker-end="url(#a)"/>
+<text x="790" y="132" fill="#EDEAF5" font-weight="800" font-size="17">10 microservices NestJS</text>
+<g font-size="14" font-weight="700">
+<rect x="790" y="146" width="170" height="40" rx="10" fill="#262238" stroke="#3E3A60"/><text x="806" y="171" fill="#EDEAF5">auth</text>
+<rect x="980" y="146" width="170" height="40" rx="10" fill="#262238" stroke="#3E3A60"/><text x="996" y="171" fill="#EDEAF5">user</text>
+<rect x="790" y="196" width="170" height="40" rx="10" fill="#262238" stroke="#3E3A60"/><text x="806" y="221" fill="#EDEAF5">content</text>
+<rect x="980" y="196" width="170" height="40" rx="10" fill="#262238" stroke="#3E3A60"/><text x="996" y="221" fill="#EDEAF5">chat</text>
+<rect x="790" y="246" width="170" height="40" rx="10" fill="#262238" stroke="#3E3A60"/><text x="806" y="271" fill="#EDEAF5">notification</text>
+<rect x="980" y="246" width="170" height="40" rx="10" fill="#262238" stroke="#3E3A60"/><text x="996" y="271" fill="#EDEAF5">matching</text>
+<rect x="790" y="296" width="170" height="40" rx="10" fill="#262238" stroke="#3E3A60"/><text x="806" y="321" fill="#EDEAF5">recommendation</text>
+<rect x="980" y="296" width="170" height="40" rx="10" fill="#262238" stroke="#3E3A60"/><text x="996" y="321" fill="#EDEAF5">subscribe</text>
+<rect x="790" y="346" width="170" height="40" rx="10" fill="#262238" stroke="#3E3A60"/><text x="806" y="371" fill="#EDEAF5">achievement</text>
+<rect x="980" y="346" width="170" height="40" rx="10" fill="#262238" stroke="#3E3A60"/><text x="996" y="371" fill="#EDEAF5">otp</text>
+</g>
+<line x1="730" y1="268" x2="784" y2="268" stroke="#8C86AE" stroke-width="2" marker-end="url(#a)"/>
+<rect x="790" y="410" width="360" height="56" rx="12" fill="#3A2E14" stroke="#FFC46B" stroke-width="2"/>
+<text x="810" y="436" fill="#FFC46B" font-weight="800">Kafka</text>
+<text x="870" y="436" fill="#EDEAF5" font-size="13">événements entre services</text>
+<text x="810" y="456" fill="#B9B4CC" font-size="13">ex. user.deleted : nettoyage dans 5 services</text>
+<path d="M970 386 L970 404" stroke="#FFC46B" stroke-width="2" marker-end="url(#k)"/>
+<text x="40" y="540" fill="#EDEAF5" font-weight="800" font-size="17">Données et services externes</text>
+<g font-size="14">
+<rect x="40" y="556" width="200" height="70" rx="12" fill="#262238" stroke="#6FE3C1"/><text x="58" y="584" fill="#6FE3C1" font-weight="800">MongoDB</text><text x="58" y="606" fill="#B9B4CC" font-size="13">profils, contenus, chat</text>
+<rect x="256" y="556" width="200" height="70" rx="12" fill="#262238" stroke="#8AB4FF"/><text x="274" y="584" fill="#8AB4FF" font-weight="800">PostgreSQL</text><text x="274" y="606" fill="#B9B4CC" font-size="13">abonnements, TypeORM</text>
+<rect x="472" y="556" width="200" height="70" rx="12" fill="#262238" stroke="#FF8A73"/><text x="490" y="584" fill="#FF8A73" font-weight="800">Redis × 2</text><text x="490" y="606" fill="#B9B4CC" font-size="13">cache + files BullMQ</text>
+<rect x="688" y="556" width="200" height="70" rx="12" fill="#262238" stroke="#F29BD0"/><text x="706" y="584" fill="#F29BD0" font-weight="800">Stripe</text><text x="706" y="606" fill="#B9B4CC" font-size="13">paiements + webhooks</text>
+<rect x="904" y="556" width="246" height="70" rx="12" fill="#262238" stroke="#FFC46B"/><text x="922" y="584" fill="#FFC46B" font-weight="800">Stockage S3</text><text x="922" y="606" fill="#B9B4CC" font-size="13">miniatures WebP 160/480/1080</text>
+</g>
+<rect x="40" y="650" width="1110" height="96" rx="14" fill="#1C1A30" stroke="#3E3A60"/>
+<text x="62" y="682" fill="#EDEAF5" font-weight="800" font-size="17">Exploitation</text>
+<text x="62" y="708" fill="#B9B4CC">Docker Compose sur un VPS · Prometheus et Grafana · 13 règles d'alerte par email · Swagger sur les 10 services</text>
+<text x="62" y="730" fill="#B9B4CC">Releases Android automatisées : Fastlane, Firebase App Distribution, Play Store</text>
+</g>
+</svg>

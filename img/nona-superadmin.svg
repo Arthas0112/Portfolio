@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" width="1200" height="760" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif">
+<rect width="1200" height="760" fill="#0F0D1C"/>
+<rect x="24" y="24" width="1152" height="712" rx="18" fill="#17152A" stroke="#2B2645"/>
+<rect x="24" y="24" width="230" height="712" rx="18" fill="#1E1B2C"/>
+<rect x="236" y="24" width="18" height="712" fill="#1E1B2C"/>
+<circle cx="62" cy="68" r="16" fill="#F29BD0"/><text x="88" y="74" fill="#EDEAF5" font-size="18" font-weight="800">Nona Admin</text>
+<g font-size="15" fill="#B9B4CC">
+<rect x="40" y="112" width="198" height="38" rx="10" fill="#2E2950"/><text x="58" y="136" fill="#EDEAF5" font-weight="700">Tableau de bord</text>
+<text x="58" y="182">Utilisateurs</text>
+<text x="58" y="222">Événements</text>
+<text x="58" y="262">Modération</text>
+<rect x="196" y="248" width="30" height="20" rx="10" fill="#FF8A73"/>
+<text x="58" y="302">Abonnements</text>
+<text x="58" y="342">Transactions</text>
+<text x="58" y="382">Notifications</text>
+<text x="58" y="422">Badges</text>
+<text x="58" y="462">Contenus légaux</text>
+<text x="58" y="502">FAQ</text>
+<text x="58" y="542">Administrateurs</text>
+</g>
+<rect x="40" y="664" width="198" height="40" rx="10" fill="#262238"/><text x="58" y="690" fill="#B9B4CC" font-size="14">FR · EN</text>
+<text x="290" y="78" fill="#EDEAF5" font-size="26" font-weight="800">Tableau de bord</text>
+<rect x="866" y="52" width="230" height="40" rx="10" fill="#262238"/><text x="884" y="77" fill="#8C86AE" font-size="14">Recherche globale</text>
+<circle cx="1130" cy="72" r="18" fill="#262238"/><circle cx="1140" cy="62" r="6" fill="#FF8A73"/>
+<g>
+<rect x="290" y="112" width="200" height="110" rx="14" fill="#262238"/><text x="310" y="142" fill="#B9B4CC" font-size="14">Utilisateurs actifs</text><rect x="310" y="160" width="120" height="22" rx="6" fill="#6FE3C1" opacity=".85"/><path d="M310 205 L340 198 L370 202 L400 190 L430 194 L470 180" stroke="#6FE3C1" stroke-width="3" fill="none"/>
+<rect x="510" y="112" width="200" height="110" rx="14" fill="#262238"/><text x="530" y="142" fill="#B9B4CC" font-size="14">Événements à venir</text><rect x="530" y="160" width="90" height="22" rx="6" fill="#7FD6F2" opacity=".85"/><path d="M530 205 L560 200 L590 192 L620 196 L650 186 L690 182" stroke="#7FD6F2" stroke-width="3" fill="none"/>
+<rect x="730" y="112" width="200" height="110" rx="14" fill="#262238"/><text x="750" y="142" fill="#B9B4CC" font-size="14">Signalements ouverts</text><rect x="750" y="160" width="60" height="22" rx="6" fill="#FF8A73" opacity=".85"/><path d="M750 190 L780 196 L810 188 L840 200 L870 194 L910 204" stroke="#FF8A73" stroke-width="3" fill="none"/>
+<rect x="950" y="112" width="200" height="110" rx="14" fill="#262238"/><text x="970" y="142" fill="#B9B4CC" font-size="14">Revenu mensuel (MRR)</text><rect x="970" y="160" width="110" height="22" rx="6" fill="#FFC46B" opacity=".85"/><path d="M970 208 L1000 202 L1030 196 L1060 190 L1090 184 L1130 176" stroke="#FFC46B" stroke-width="3" fill="none"/>
+</g>
+<rect x="290" y="242" width="530" height="270" rx="14" fill="#262238"/>
+<text x="310" y="274" fill="#EDEAF5" font-size="16" font-weight="800">Revenus sur 30 jours</text>
+<g fill="#F29BD0" opacity=".9">
+<rect x="318" y="430" width="22" height="60" rx="4"/><rect x="352" y="410" width="22" height="80" rx="4"/><rect x="386" y="420" width="22" height="70" rx="4"/><rect x="420" y="390" width="22" height="100" rx="4"/><rect x="454" y="400" width="22" height="90" rx="4"/><rect x="488" y="370" width="22" height="120" rx="4"/><rect x="522" y="380" width="22" height="110" rx="4"/><rect x="556" y="350" width="22" height="140" rx="4"/><rect x="590" y="360" width="22" height="130" rx="4"/><rect x="624" y="330" width="22" height="160" rx="4"/><rect x="658" y="340" width="22" height="150" rx="4"/><rect x="692" y="310" width="22" height="180" rx="4"/><rect x="726" y="320" width="22" height="170" rx="4"/><rect x="760" y="296" width="22" height="194" rx="4"/>
+</g>
+<rect x="840" y="242" width="310" height="270" rx="14" fill="#262238"/>
+<text x="860" y="274" fill="#EDEAF5" font-size="16" font-weight="800">Répartition des plans</text>
+<g font-size="13" fill="#B9B4CC">
+<text x="860" y="312">Free</text><rect x="940" y="300" width="190" height="12" rx="6" fill="#3E3A60"/><rect x="940" y="300" width="160" height="12" rx="6" fill="#8C86AE"/>
+<text x="860" y="352">Lite</text><rect x="940" y="340" width="190" height="12" rx="6" fill="#3E3A60"/><rect x="940" y="340" width="90" height="12" rx="6" fill="#7FD6F2"/>
+<text x="860" y="392">Bronze</text><rect x="940" y="380" width="190" height="12" rx="6" fill="#3E3A60"/><rect x="940" y="380" width="70" height="12" rx="6" fill="#FF8A73"/>
+<text x="860" y="432">Gold</text><rect x="940" y="420" width="190" height="12" rx="6" fill="#3E3A60"/><rect x="940" y="420" width="50" height="12" rx="6" fill="#FFC46B"/>
+<text x="860" y="472">Platinium</text><rect x="940" y="460" width="190" height="12" rx="6" fill="#3E3A60"/><rect x="940" y="460" width="30" height="12" rx="6" fill="#F29BD0"/>
+</g>
+<rect x="290" y="532" width="860" height="180" rx="14" fill="#262238"/>
+<text x="310" y="564" fill="#EDEAF5" font-size="16" font-weight="800">File de modération</text>
+<g font-size="14">
+<rect x="310" y="580" width="820" height="36" rx="8" fill="#1E1B2C"/><circle cx="332" cy="598" r="10" fill="#8C86AE"/><rect x="352" y="591" width="160" height="12" rx="6" fill="#3E3A60"/><rect x="560" y="586" width="120" height="24" rx="12" fill="#3A2420"/><text x="574" y="603" fill="#FF8A73">Harcèlement</text><rect x="980" y="586" width="64" height="24" rx="8" fill="#6FE3C1"/><text x="992" y="603" fill="#15131F" font-weight="700">Traiter</text><rect x="1052" y="586" width="64" height="24" rx="8" fill="#2E2950"/><text x="1062" y="603" fill="#EDEAF5">Rejeter</text>
+<rect x="310" y="624" width="820" height="36" rx="8" fill="#1E1B2C"/><circle cx="332" cy="642" r="10" fill="#8C86AE"/><rect x="352" y="635" width="200" height="12" rx="6" fill="#3E3A60"/><rect x="560" y="630" width="120" height="24" rx="12" fill="#3A3420"/><text x="582" y="647" fill="#FFC46B">Faux profil</text><rect x="980" y="630" width="64" height="24" rx="8" fill="#6FE3C1"/><text x="992" y="647" fill="#15131F" font-weight="700">Traiter</text><rect x="1052" y="630" width="64" height="24" rx="8" fill="#2E2950"/><text x="1062" y="647" fill="#EDEAF5">Rejeter</text>
+<rect x="310" y="668" width="820" height="36" rx="8" fill="#1E1B2C"/><circle cx="332" cy="686" r="10" fill="#8C86AE"/><rect x="352" y="679" width="140" height="12" rx="6" fill="#3E3A60"/><rect x="560" y="674" width="120" height="24" rx="12" fill="#2A2350"/><text x="600" y="691" fill="#F29BD0">Spam</text><rect x="980" y="674" width="64" height="24" rx="8" fill="#6FE3C1"/><text x="992" y="691" fill="#15131F" font-weight="700">Traiter</text><rect x="1052" y="674" width="64" height="24" rx="8" fill="#2E2950"/><text x="1062" y="691" fill="#EDEAF5">Rejeter</text>
+</g>
+<text x="1150" y="752" fill="#5A5590" font-size="12" text-anchor="end">Illustration de l'interface, sans données réelles</text>
+</svg>
