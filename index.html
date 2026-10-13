@@ -137,7 +137,10 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:24px 16px 40p
 .stage{container-type:size}
 .mexit{display:none;position:absolute;top:max(8px,env(safe-area-inset-top));right:max(10px,env(safe-area-inset-right));z-index:65;width:42px;height:42px;border-radius:50%;border:2px solid rgba(237,234,245,.35);background:rgba(18,15,30,.7);color:#fff;font:700 18px var(--body);line-height:1;cursor:pointer;align-items:center;justify-content:center}
 .mexit:focus-visible{outline:2px solid var(--mint);outline-offset:2px}
-body.mgame{overflow:hidden}
+body.mgame{overflow:hidden;overscroll-behavior:none}
+body.mgame .wrapgame,body.mgame .wrapgame *{touch-action:none;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+body.mgame dialog.quick,body.mgame dialog.quick *{touch-action:pan-y}
+.pad,.pad *{touch-action:none;-webkit-tap-highlight-color:transparent}
 body.mgame .wrapgame{padding:0!important;background:#000}
 body.mgame .stage{max-width:none!important;width:100%!important;height:100%!important;aspect-ratio:auto!important;border:0!important;border-radius:0!important;box-shadow:none!important;margin:0}
 body.mgame #cv{object-fit:contain}
@@ -632,11 +635,13 @@ document.getElementById('charTop').addEventListener('click',openSheet);document.
 const landBtn=document.getElementById('landBtn'),landExit=document.getElementById('landExit');
 const COARSE=window.matchMedia&&window.matchMedia('(pointer:coarse)').matches;
 function fitView(){const st=document.getElementById('stage');let nw=640;if(document.body.classList.contains('mgame')&&st&&st.clientHeight>0){nw=Math.round(Math.min(960,Math.max(480,360*st.clientWidth/st.clientHeight)));}if(nw!==W){W=nw;cv.width=W;cv.height=H;ctx.imageSmoothingEnabled=false;camX=camT=Math.max(0,Math.min(WORLD-W,hero.x-W*0.38));}}
-function mgUpdate(){document.body.classList.toggle('mgame',document.body.classList.contains('force-land')||(!!fsEl()&&COARSE));requestAnimationFrame(()=>{fitView();requestAnimationFrame(fitView);});}
-window.addEventListener('resize',()=>requestAnimationFrame(fitView));window.addEventListener('orientationchange',()=>setTimeout(fitView,300));
+let VPMETA=null,VPORIG='';function vpLock(on){if(!VPMETA){VPMETA=document.querySelector('meta[name=viewport]');if(!VPMETA){VPMETA=document.createElement('meta');VPMETA.name='viewport';VPMETA.content='width=device-width,initial-scale=1';document.head.appendChild(VPMETA);}VPORIG=VPMETA.content;}VPMETA.content=on?'width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover':VPORIG;}
+function sizeForced(){const w=wrap.style;if(document.body.classList.contains('force-land')){const vv=window.visualViewport;const vw=Math.round(vv?vv.width:window.innerWidth),vh=Math.round(vv?vv.height:window.innerHeight);w.width=vh+'px';w.height=vw+'px';w.left=vw+'px';w.top='0px';}else{w.width='';w.height='';w.left='';w.top='';}}
+function mgUpdate(){document.body.classList.toggle('mgame',document.body.classList.contains('force-land')||(!!fsEl()&&COARSE));vpLock(document.body.classList.contains('mgame'));sizeForced();requestAnimationFrame(()=>{fitView();requestAnimationFrame(fitView);});}
+window.addEventListener('resize',()=>requestAnimationFrame(()=>{sizeForced();fitView();}));if(window.visualViewport)window.visualViewport.addEventListener('resize',()=>requestAnimationFrame(()=>{sizeForced();fitView();}));window.addEventListener('orientationchange',()=>setTimeout(fitView,300));
 function forceLand(on){document.body.classList.toggle('force-land',on);if(on)window.scrollTo(0,0);mgUpdate();}
 function exitGameMode(){forceLand(false);if(fsEl()){try{(document.exitFullscreen||document.webkitExitFullscreen).call(document);}catch(e){}}try{screen.orientation&&screen.orientation.unlock&&screen.orientation.unlock();}catch(e){}mgUpdate();}
-document.getElementById('mExit').addEventListener('click',exitGameMode);
+document.getElementById('mExit').addEventListener('click',exitGameMode);document.addEventListener('gesturestart',(e)=>{if(document.body.classList.contains('mgame'))e.preventDefault();});document.addEventListener('dblclick',(e)=>{if(document.body.classList.contains('mgame'))e.preventDefault();});
 document.addEventListener('fullscreenchange',mgUpdate);document.addEventListener('webkitfullscreenchange',mgUpdate);
 landBtn.addEventListener('click',()=>{const done=()=>{};const fallback=()=>{if(fsEl()){try{(document.exitFullscreen||document.webkitExitFullscreen).call(document);}catch(e){}}forceLand(true);};try{const rq=wrap.requestFullscreen||wrap.webkitRequestFullscreen;if(!rq||!(screen.orientation&&screen.orientation.lock)){fallback();return;}const p=rq.call(wrap);Promise.resolve(p).then(()=>screen.orientation.lock('landscape')).then(done).catch(fallback);}catch(e){fallback();}});
 landExit.addEventListener('click',exitGameMode);
