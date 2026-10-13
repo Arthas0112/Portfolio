@@ -133,6 +133,15 @@ a{color:var(--mint)}
 footer{text-align:center;color:var(--muted);font-size:13px;padding:24px 16px 40px}
 @media (max-width:560px){.hud .box{font-size:11px;padding:4px 7px}.xpbar{width:56px}.stat{grid-template-columns:100px 1fr 40px}.nums{grid-template-columns:1fr 1fr}.map{width:80%;bottom:6px}.top .btn{padding:0 12px}}
 .stage{container-type:size}
+.zone:empty{visibility:hidden}
+.loadbar{position:absolute;left:50%;bottom:40px;transform:translateX(-50%);z-index:20;width:min(280px,64%);padding:8px 12px 7px;background:rgba(18,15,30,.9);border:2px solid #2B2645;border-radius:10px;font-family:var(--pixel);font-size:11px;color:var(--gold);text-align:center;transition:opacity .5s;pointer-events:none}
+.loadbar i{display:block;height:10px;background:#1A1729;border:2px solid #2B2645;border-radius:3px;margin-bottom:5px;position:relative;overflow:hidden}
+.loadbar i::after{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--p,0%);background:repeating-linear-gradient(90deg,var(--mint) 0 6px,#4FC7A6 6px 8px);transition:width .2s}
+.loadbar.done{opacity:0}
+.hud .box{white-space:nowrap}
+@container (max-width:620px){.hud{padding:6px 7px;gap:5px}.hud .box{font-size:9px;padding:3px 6px;border-width:1px;border-radius:6px}.xpbar{width:38px;height:6px}.xp{gap:5px}.hudr{gap:4px}}
+@container (max-width:420px){.hud .box{font-size:8px;padding:2px 5px}.xpbar{width:28px}}
+@media (pointer:coarse) and (orientation:landscape) and (max-height:540px){.top{padding:6px 12px;flex-wrap:nowrap;gap:10px}.brand{font-size:12px;white-space:nowrap}.tools{flex-wrap:nowrap;overflow-x:auto;gap:6px;scrollbar-width:none}.tools::-webkit-scrollbar{display:none}.top .btn{min-height:34px;padding:0 10px;font-size:12px;border-radius:8px;white-space:nowrap;flex:none}.stage{max-width:min(100%,calc((100vh - 64px) * 16 / 9))}.pad{position:fixed;left:0;right:0;bottom:10px;margin:0;padding:0 max(10px,env(safe-area-inset-left)) 0 max(10px,env(safe-area-inset-right));pointer-events:none;z-index:30}.pad .grp{pointer-events:auto;flex-direction:column;gap:8px}.pad .grp:first-child{flex-direction:row}.pad button{width:54px;height:54px;opacity:.9}.hint{display:none}}
 @container (max-height:440px){#intro .card{padding:14px 16px}#intro .card h2{font-size:22px;margin:4px 0 8px}#intro .keys{display:none}#intro p[data-t="introText"]{font-size:13px;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}#intro .row{margin-top:8px}}
 @container (max-height:260px){#intro p[data-t="introText"],#intro .tag{display:none}}
 @media (max-width:820px),(pointer:coarse){#panel,#end{position:fixed;z-index:40;background:rgba(12,10,22,.88)}#panel .card,#end .card{max-height:calc(100vh - 32px)}}
@@ -152,6 +161,7 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:24px 16px 40p
 </div>
 <div class="map" id="map" role="group" data-t-aria="mapLabel"><div class="track"></div></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="loadbar" id="loadbar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i><span id="loadtxt"></span></div>
 <div class="overlay" id="intro">
 <div class="card">
 <p class="tag" style="color:var(--gold)" data-t="introTag"></p>
@@ -236,7 +246,7 @@ rotate:'Tourne ton téléphone pour jouer en grand.',hint:'Sprites du personnage
 cTitle:'Le portfolio, en mode classique',cLead:'Tout ce qu’on trouve dans le jeu, sur une seule page. Développeur full-stack chez RAZONE à Antananarivo depuis 2025, avec 5 ans de design graphique, de la photo et de la vidéo, et un pied dans le jeu vidéo.',
 cL1:'Niveau 1 · Les métiers',cL2:'Niveau 2 · Nona',cL3:'Niveau 3 · Les quêtes',cL4:'Niveau 4 · Le parcours',cL5:'Fin de partie · Contact',cBonus:'Bonus · Les coulisses',
 footer:'Haritiana · portfolio jouable, codé à la main en JavaScript',lbLabel:'Image agrandie',lbPrev:'Image précédente',lbNext:'Image suivante',zoom:'Agrandir : ',
-commits:'Commits',found:'lieux découverts',tTime:'TEMPS',tBest:'RECORD',timeLbl:'temps de jeu',bestLbl:'record',fName:'Ton nom',fEmail:'Ton e-mail',fMsg:'Ton message',fSend:'Envoyer le message',fSending:'Envoi…',fOk:'Message envoyé, merci ! Je te réponds vite.',fErr:'Envoi impossible pour le moment. Écris-moi directement à l’adresse ci-dessous.',fMailto:'Ton application mail s’ouvre avec le message prêt à partir.',fOr:'Ou directement :',newBest:'Nouveau record : {t}',gotCommits:'commits ramassés',fixed:'bugs corrigés',
+commits:'Commits',found:'lieux découverts',tTime:'TEMPS',loading:'Chargement du monde',tBest:'RECORD',timeLbl:'temps de jeu',bestLbl:'record',fName:'Ton nom',fEmail:'Ton e-mail',fMsg:'Ton message',fSend:'Envoyer le message',fSending:'Envoi…',fOk:'Message envoyé, merci ! Je te réponds vite.',fErr:'Envoi impossible pour le moment. Écris-moi directement à l’adresse ci-dessous.',fMailto:'Ton application mail s’ouvre avec le message prêt à partir.',fOr:'Ou directement :',newBest:'Nouveau record : {t}',gotCommits:'commits ramassés',fixed:'bugs corrigés',
 tBug:'Bug corrigé ! +1',tHurt:'Aïe, un bug !',tSecret:'Coffre secret débloqué au bout du chemin !',tLocked:'Coffre verrouillé : ramasse les {n} commits ({c}/{n})',
 mapLabel:'Mini-carte',goTo:'Aller à : ',tTravel:'Voyage rapide !',tLemur:'Un lémurien te rejoint !',achTitle:'Succès',achUnlocked:'Succès débloqué : ',achCount:'{n} succès sur {t}',
 npcVillager:['Salama ! Bienvenue au village.','Chaque panneau raconte un métier d’Haritiana.','Astuce : clique sur la mini-carte pour voyager plus vite.'],npcZebu:['Meuh… attention aux bugs plus loin !','Saute dessus pour les corriger.','Et ramasse tous les commits : un coffre secret t’attend.'],
@@ -264,7 +274,7 @@ rotate:'Turn your phone sideways to play full size.',hint:'Character, bug and co
 cTitle:'The portfolio, classic view',cLead:'Everything from the game, on a single page. Full-stack developer at RAZONE in Antananarivo since 2025, with 5 years of graphic design, photo and video work, and a foot in game development.',
 cL1:'Level 1 · Crafts',cL2:'Level 2 · Nona',cL3:'Level 3 · Quests',cL4:'Level 4 · Journey',cL5:'Game over · Contact',cBonus:'Bonus · Behind the scenes',
 footer:'Haritiana · playable portfolio, hand-coded in JavaScript',lbLabel:'Enlarged image',lbPrev:'Previous image',lbNext:'Next image',zoom:'Enlarge: ',
-commits:'Commits',found:'places discovered',tTime:'TIME',tBest:'BEST',timeLbl:'play time',bestLbl:'best',fName:'Your name',fEmail:'Your email',fMsg:'Your message',fSend:'Send message',fSending:'Sending…',fOk:'Message sent, thank you! I will reply soon.',fErr:'Sending failed for now. Write to me directly at the address below.',fMailto:'Your mail app is opening with the message ready to send.',fOr:'Or directly:',newBest:'New record: {t}',gotCommits:'commits collected',fixed:'bugs fixed',
+commits:'Commits',found:'places discovered',tTime:'TIME',loading:'Loading the world',tBest:'BEST',timeLbl:'play time',bestLbl:'best',fName:'Your name',fEmail:'Your email',fMsg:'Your message',fSend:'Send message',fSending:'Sending…',fOk:'Message sent, thank you! I will reply soon.',fErr:'Sending failed for now. Write to me directly at the address below.',fMailto:'Your mail app is opening with the message ready to send.',fOr:'Or directly:',newBest:'New record: {t}',gotCommits:'commits collected',fixed:'bugs fixed',
 tBug:'Bug fixed! +1',tHurt:'Ouch, a bug!',tSecret:'Secret chest unlocked at the end of the road!',tLocked:'Locked chest: collect all {n} commits ({c}/{n})',
 mapLabel:'Mini-map',goTo:'Go to: ',tTravel:'Fast travel!',tLemur:'A lemur joins you!',achTitle:'Achievements',achUnlocked:'Achievement unlocked: ',achCount:'{n} of {t} achievements',
 npcVillager:['Salama! Welcome to the village.','Each sign tells one of Haritiana’s crafts.','Tip: click the mini-map to travel faster.'],npcZebu:['Moo… watch out for bugs ahead!','Jump on them to fix them.','And collect every commit: a secret chest awaits.'],
@@ -335,7 +345,8 @@ const cv=document.getElementById('cv'),ctx=cv.getContext('2d');ctx.imageSmoothin
 const W=640,H=360,GY=300,WORLD=7640;
 const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 let seed=7;const rnd=()=>{seed=(seed*16807)%2147483647;return (seed-1)/2147483646;};
-const imgs={};const ok=(k)=>imgs[k]&&imgs[k].complete&&imgs[k].naturalWidth>0;Object.keys(IMG).forEach((k)=>{const i=new Image();i.src=IMG[k];imgs[k]=i;});
+const imgs={};const ok=(k)=>imgs[k]&&imgs[k].complete&&imgs[k].naturalWidth>0;const LB=document.getElementById('loadbar'),LBT=document.getElementById('loadtxt'),LK=Object.keys(IMG);let nL=0;function lp(){nL++;const p=Math.round(nL/LK.length*100);LB.style.setProperty('--p',p+'%');LB.setAttribute('aria-valuenow',String(p));LBT.textContent=tr('loading')+' '+p+'%';if(nL>=LK.length)setTimeout(()=>{LB.classList.add('done');LB.setAttribute('aria-hidden','true');},300);}
+LK.forEach((k)=>{const i=new Image();i.onload=lp;i.onerror=lp;i.src=IMG[k];imgs[k]=i;});
 function layer(w,h,fn){const c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d');g.imageSmoothingEnabled=false;fn(g,w,h);return c;}
 function px(g,x,y,w,h,c){g.fillStyle=c;g.fillRect(Math.round(x),Math.round(y),Math.round(w),Math.round(h));}
 function disc(g,cx,cy,r,c){g.fillStyle=c;for(let y=-r;y<=r;y++){const hw=Math.round(Math.sqrt(r*r-y*y));g.fillRect(Math.round(cx-hw),Math.round(cy+y),hw*2,1);}}
@@ -480,7 +491,7 @@ parts=parts.filter((p)=>{p.life-=dt;p.x+=p.vx;p.y+=p.vy;p.vy+=0.25;return p.life
 bugs.forEach((b)=>{if(!b.alive){b.sq-=dt;return;}b.x+=b.dir*0.6;if(b.x<b.a){b.x=b.a;b.dir=1;}if(b.x>b.b){b.x=b.b;b.dir=-1;}});
 NPCS.forEach((n)=>{const d=Math.abs(hero.x-n.x);const nr=started&&d<110;if(nr&&!n.near){n.chars=0;n.t=0;}n.near=nr;if(nr){n.chars+=dt*38;n.t+=dt;const line=tr(n.lines)[n.li%tr(n.lines).length];if(n.t>Math.max(2.6,line.length/38+1.8)){n.li++;n.chars=0;n.t=0;}}});
 if(!started||paused){actQ=false;jumpQ=false;return;}
-playTime+=dt;timerUI();
+playTime+=dt;timerUI();ambient(dt);
 const acc=0.55,max=3.4;
 if(keys.left){hero.vx=Math.max(hero.vx-acc,-max);hero.face=-1;}else if(keys.right){hero.vx=Math.min(hero.vx+acc,max);hero.face=1;}else{hero.vx*=hero.ground?0.72:0.92;if(Math.abs(hero.vx)<0.05)hero.vx=0;}
 if(jumpQ&&hero.ground){SFX.jump();hero.vy=-12;hero.ground=false;burst(hero.x,GY,'#B98C5E',6);}
@@ -505,6 +516,7 @@ const FLIES=[];for(let i=0;i<26;i++)FLIES.push({x:rnd()*W,y:150+rnd()*140,p:rnd(
 const DAY=180;function nightness(){if(reduce)return 0;const ph=(t%DAY)/DAY;return Math.max(0,Math.min(1,(0.5-0.5*Math.cos(TAU*ph))*1.25-0.12))*0.88;}
 const strC={};function strip(k,n){const key=k+n;if(strC[key])return strC[key];const im=imgs[k];const c=document.createElement('canvas');c.width=im.width*n;c.height=im.height;const g=c.getContext('2d');for(let i=0;i<n;i++){g.save();if(i%2){g.translate((i+1)*im.width,0);g.scale(-1,1);}else g.translate(i*im.width,0);g.drawImage(im,0,0);g.restore();}strC[key]=c;return c;}
 function pan(img,y){const span=Math.max(0,img.width-W);const k=Math.max(0,Math.min(1,camX/Math.max(1,WORLD-W)));ctx.drawImage(img,-Math.round(k*span),y||0);}
+const AMB={bird:2,crick:1};function ambient(dt){if(muted||!actx||document.hidden)return;const nt=nightness();AMB.bird-=dt;AMB.crick-=dt;if(AMB.bird<=0){AMB.bird=2.5+Math.random()*5;if(nt<0.45){const n=2+Math.floor(Math.random()*3),b=2200+Math.random()*1400,v=0.012*(1-nt*1.6);for(let i=0;i<n;i++){const f=b*(0.9+Math.random()*0.25);tone(f,f*(1.15+Math.random()*0.3),0.05+Math.random()*0.04,'sine',v,i*(0.08+Math.random()*0.05));}}}if(AMB.crick<=0){AMB.crick=0.55+Math.random()*0.7;if(nt>0.3){const v=0.007*nt,f=4100+Math.random()*500;for(let i=0;i<3+Math.floor(Math.random()*2);i++)tone(f,f,0.022,'sine',v,i*0.045);}}}
 const mirC={};function mir(k){if(mirC[k])return mirC[k];const im=imgs[k];const c=document.createElement('canvas');c.width=im.width*2;c.height=im.height;const g=c.getContext('2d');g.drawImage(im,0,0);g.translate(c.width,0);g.scale(-1,1);g.drawImage(im,0,0);mirC[k]=c;return c;}
 function updLemur(dt){lemur.t+=dt;if(!lemur.joined){if(ok('lemur')&&Math.abs(hero.x-lemur.x)<70&&started){lemur.joined=true;toast(tr('tLemur'));SFX.coin();burst(lemur.x,GY-30,'#F29BD0',14);save();}return;}const tx=hero.x-hero.face*56;const dx=tx-lemur.x;const sp=Math.min(5.2,Math.abs(dx)*0.08);lemur.moving=Math.abs(dx)>6;if(lemur.moving){lemur.x+=Math.sign(dx)*sp;lemur.face=dx>0?1:-1;}else lemur.face=hero.face;if(Math.abs(dx)>400){lemur.x=tx;}const gy=hero.ground?hero.y:Math.min(GY,lemur.y);lemur.y+=(gy-lemur.y)*0.25;}
 function drawLemur(){const sx=Math.round(lemur.x-camX);if(sx<-60||sx>W+60)return;ctx.save();ctx.translate(sx,0);const y=Math.round(lemur.y);const runA=lemur.joined&&lemur.moving&&ok('lemurRun');if(runA?lemur.face<0:lemur.face>0)ctx.scale(-1,1);if(runA){const fw=imgs.lemurRun.height;const n=Math.max(1,Math.round(imgs.lemurRun.width/fw));const f=Math.floor(lemur.t*12)%n;ctx.drawImage(imgs.lemurRun,f*fw,0,fw,fw,-fw/2,y-fw,fw,fw);}else if(ok('lemur')){const im=imgs.lemur;const bob=lemur.joined?0:Math.round(Math.abs(Math.sin(lemur.t*3))*2);ctx.drawImage(im,-im.width/2,y-im.height+1-bob);}ctx.restore();if(!lemur.joined&&started){const b=Math.round(Math.sin(t*4)*2);text('?',sx,lemur.y-60+b,12,'#F29BD0',0,'#1A1020');}}
