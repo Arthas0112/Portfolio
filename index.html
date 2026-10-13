@@ -143,7 +143,8 @@ body.mgame dialog.quick,body.mgame dialog.quick *{touch-action:pan-y}
 .pad,.pad *{touch-action:none;-webkit-tap-highlight-color:transparent}
 body.mgame .wrapgame{padding:0!important;background:#000}
 body.mgame .stage{max-width:none!important;width:100%!important;height:100%!important;aspect-ratio:auto!important;border:0!important;border-radius:0!important;box-shadow:none!important;margin:0}
-body.mgame #cv{object-fit:contain}
+body.mgame .stage{position:fixed!important;top:0!important;left:0!important;right:0!important;bottom:0!important}
+body.mgame #cv{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 body.mgame .mexit{display:flex}
 body.mgame .hud{padding-right:62px}
 body.mgame .rot,body.mgame .hint,body.mgame .landbtn,body.mgame .landexit{display:none!important}
