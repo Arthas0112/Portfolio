@@ -8,4 +8,4 @@ On avance dans un monde inspiré de Madagascar et chaque panneau, coffre ou drap
 - Sprites du personnage, des ennemis et des décors générés avec SpriteCook.
 - Site statique : `index.html`, `sprites/`, `img/`, `cv/`.
 
-Site en ligne : https://arthas0112.github.io/Portfolio/
+Site en ligne : https://haritiana.is-a.dev/
