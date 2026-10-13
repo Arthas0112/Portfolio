@@ -46,6 +46,18 @@ a{color:var(--mint)}
 .xpbar{width:90px;height:8px;background:#2B2645;border-radius:2px;overflow:hidden}
 .xpbar i{display:block;height:100%;width:0;background:var(--mint);transition:width .4s}
 .coins{color:var(--gold)}
+.hudr{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.timer{color:var(--cyan);font-variant-numeric:tabular-nums}
+.timer.done{color:var(--mint)}
+.timer em{font-style:normal;color:var(--muted)}
+.cform{display:grid;gap:10px;margin:14px 0 4px}
+.cform label{display:grid;gap:4px;font-size:13px;font-weight:700;color:var(--muted)}
+.cform input,.cform textarea{width:100%;font:500 15px var(--body);color:var(--fg);background:var(--panel2);border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;resize:vertical}
+.cform input:focus-visible,.cform textarea:focus-visible{outline:2px solid var(--mint);outline-offset:1px;border-color:transparent}
+.cform .fmsg{margin:0;font-size:14px;min-height:1.2em}
+.cform .fmsg.ok{color:var(--mint)}
+.cform .fmsg.err{color:var(--coral)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 .map{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);width:min(62%,520px);height:22px}
 .map .zbtn{position:absolute;top:0;height:22px;appearance:none;border:0;padding:0;background:transparent;cursor:pointer;border-radius:4px}
 .map .zbtn:hover{background:rgba(255,196,107,.18)}
@@ -136,7 +148,7 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:24px 16px 40p
 <div class="hud" aria-hidden="true">
 <div class="box xp">XP <span class="xpbar"><i id="xpbar"></i></span> <span id="xptxt">0/0</span></div>
 <div class="box zone" id="zone"></div>
-<div class="box coins" id="coins"></div>
+<div class="hudr"><div class="box coins" id="coins"></div><div class="box timer" id="timer"></div></div>
 </div>
 <div class="map" id="map" role="group" data-t-aria="mapLabel"><div class="track"></div></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -159,7 +171,7 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:24px 16px 40p
 <p class="tag" style="color:var(--gold)" data-t="endTag"></p>
 <h2 id="etitle" data-t="endTitle"></h2>
 <p data-t="endText"></p>
-<div class="nums" id="endStats" style="grid-template-columns:repeat(3,1fr);text-align:left"></div>
+<div class="nums" id="endStats" style="grid-template-columns:repeat(auto-fit,minmax(120px,1fr));text-align:left"></div>
 <p class="tag" style="color:var(--gold);margin-top:6px" id="achHead"></p>
 <div class="achs" id="endAchs"></div>
 <div class="row" style="justify-content:center"><a class="btn primary" href="mailto:rhartiana.fanomezana@gmail.com" data-t="contactMe"></a><a class="btn cvlink" href="cv/Haritiana_Ranaivojaona_CV.pdf" target="_blank" rel="noopener" data-t="cv"></a><button class="btn" id="endClose" type="button" data-t="keepExploring"></button><button class="btn" id="endRestart" type="button" data-t="restart"></button></div>
@@ -210,7 +222,7 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:24px 16px 40p
 <script>
 (function(){
 const IMG={hero:'sprites/hero.webp',run:'sprites/hero-run.webp',idle:'sprites/hero-idle.webp',jump:'sprites/hero-jump.webp',bug:'sprites/bug.webp',bugw:'sprites/bug-walk.webp',coin:'sprites/coin.webp',coins:'sprites/coin-spin.webp',nona:'sprites/nona.webp',sky:'sprites/bg-sky.webp',mount:'sprites/bg-mount.webp',hills:'sprites/bg-hills.webp',chestOpen:'sprites/chest-open.webp',wave:'sprites/hero-wave.webp',chest:'sprites/chest.webp',sign:'sprites/sign.webp',house:'sprites/house.webp',plat:'sprites/platform.webp',pillar:'sprites/pillar.webp',flag:'sprites/flag.webp',raven:'sprites/ravenala.webp',baobab:'sprites/baobab.webp',gate:'sprites/gate.webp',welcome:'sprites/welcome.webp',arcade:'sprites/arcade.webp',lemur:'sprites/lemur.webp',lemurRun:'sprites/lemur-run.webp',zebu:'sprites/zebu.webp',villager:'sprites/villager.webp',fg:'sprites/fg-foliage.webp'};
-const EMAIL='rhartiana.fanomezana@gmail.com',GH='https://github.com/haritiana',LI='https://www.linkedin.com/in/haritiana-fanomezana-ranaivojaona-4a31b4239';
+const EMAIL='rhartiana.fanomezana@gmail.com',FORMSPREE='',GH='https://github.com/haritiana',LI='https://www.linkedin.com/in/haritiana-fanomezana-ranaivojaona-4a31b4239';
 const CVFR='cv/Haritiana_Ranaivojaona_CV.pdf',CVEN='cv/Haritiana_Ranaivojaona_Resume.pdf';
 const T={
 fr:{brand:'HARITIANA',sndOn:'Son : oui',sndOff:'Son : non',musOn:'Musique : oui',musOff:'Musique : non',cv:'Mon CV',classic:'Mode classique',full:'Plein écran',fullExit:'Quitter le plein écran',lang:'EN',langLabel:'Switch to English',
@@ -224,7 +236,7 @@ rotate:'Tourne ton téléphone pour jouer en grand.',hint:'Sprites du personnage
 cTitle:'Le portfolio, en mode classique',cLead:'Tout ce qu’on trouve dans le jeu, sur une seule page. Développeur full-stack chez RAZONE à Antananarivo depuis 2025, avec 5 ans de design graphique, de la photo et de la vidéo, et un pied dans le jeu vidéo.',
 cL1:'Niveau 1 · Les métiers',cL2:'Niveau 2 · Nona',cL3:'Niveau 3 · Les quêtes',cL4:'Niveau 4 · Le parcours',cL5:'Fin de partie · Contact',cBonus:'Bonus · Les coulisses',
 footer:'Haritiana · portfolio jouable, codé à la main en JavaScript',lbLabel:'Image agrandie',lbPrev:'Image précédente',lbNext:'Image suivante',zoom:'Agrandir : ',
-commits:'Commits',found:'lieux découverts',gotCommits:'commits ramassés',fixed:'bugs corrigés',
+commits:'Commits',found:'lieux découverts',tTime:'TEMPS',tBest:'RECORD',timeLbl:'temps de jeu',bestLbl:'record',fName:'Ton nom',fEmail:'Ton e-mail',fMsg:'Ton message',fSend:'Envoyer le message',fSending:'Envoi…',fOk:'Message envoyé, merci ! Je te réponds vite.',fErr:'Envoi impossible pour le moment. Écris-moi directement à l’adresse ci-dessous.',fMailto:'Ton application mail s’ouvre avec le message prêt à partir.',fOr:'Ou directement :',newBest:'Nouveau record : {t}',gotCommits:'commits ramassés',fixed:'bugs corrigés',
 tBug:'Bug corrigé ! +1',tHurt:'Aïe, un bug !',tSecret:'Coffre secret débloqué au bout du chemin !',tLocked:'Coffre verrouillé : ramasse les {n} commits ({c}/{n})',
 mapLabel:'Mini-carte',goTo:'Aller à : ',tTravel:'Voyage rapide !',tLemur:'Un lémurien te rejoint !',achTitle:'Succès',achUnlocked:'Succès débloqué : ',achCount:'{n} succès sur {t}',
 npcVillager:['Salama ! Bienvenue au village.','Chaque panneau raconte un métier d’Haritiana.','Astuce : clique sur la mini-carte pour voyager plus vite.'],npcZebu:['Meuh… attention aux bugs plus loin !','Saute dessus pour les corriger.','Et ramasse tous les commits : un coffre secret t’attend.'],
@@ -252,7 +264,7 @@ rotate:'Turn your phone sideways to play full size.',hint:'Character, bug and co
 cTitle:'The portfolio, classic view',cLead:'Everything from the game, on a single page. Full-stack developer at RAZONE in Antananarivo since 2025, with 5 years of graphic design, photo and video work, and a foot in game development.',
 cL1:'Level 1 · Crafts',cL2:'Level 2 · Nona',cL3:'Level 3 · Quests',cL4:'Level 4 · Journey',cL5:'Game over · Contact',cBonus:'Bonus · Behind the scenes',
 footer:'Haritiana · playable portfolio, hand-coded in JavaScript',lbLabel:'Enlarged image',lbPrev:'Previous image',lbNext:'Next image',zoom:'Enlarge: ',
-commits:'Commits',found:'places discovered',gotCommits:'commits collected',fixed:'bugs fixed',
+commits:'Commits',found:'places discovered',tTime:'TIME',tBest:'BEST',timeLbl:'play time',bestLbl:'best',fName:'Your name',fEmail:'Your email',fMsg:'Your message',fSend:'Send message',fSending:'Sending…',fOk:'Message sent, thank you! I will reply soon.',fErr:'Sending failed for now. Write to me directly at the address below.',fMailto:'Your mail app is opening with the message ready to send.',fOr:'Or directly:',newBest:'New record: {t}',gotCommits:'commits collected',fixed:'bugs fixed',
 tBug:'Bug fixed! +1',tHurt:'Ouch, a bug!',tSecret:'Secret chest unlocked at the end of the road!',tLocked:'Locked chest: collect all {n} commits ({c}/{n})',
 mapLabel:'Mini-map',goTo:'Go to: ',tTravel:'Fast travel!',tLemur:'A lemur joins you!',achTitle:'Achievements',achUnlocked:'Achievement unlocked: ',achCount:'{n} of {t} achievements',
 npcVillager:['Salama! Welcome to the village.','Each sign tells one of Haritiana’s crafts.','Tip: click the mini-map to travel faster.'],npcZebu:['Moo… watch out for bugs ahead!','Jump on them to fix them.','And collect every commit: a secret chest awaits.'],
@@ -362,7 +374,10 @@ const hero={x:120,y:GY,vx:0,vy:0,ground:true,face:1,runT:0,inv:0,land:0,waveT:0}
 const DECO=[['raven',500],['baobab',650],['baobab',2360],['raven',2940],['baobab',3380],['raven',5960],['baobab',6050],['raven',7600]];
 const NPCS=[{k:'villager',x:760,lines:'npcVillager',face:-1},{k:'zebu',x:4905,lines:'npcZebu',face:-1,s:0.66}];NPCS.forEach((n)=>{n.li=0;n.chars=0;n.t=0;n.near=false;});
 const lemur={joined:false,x:230,y:GY,vy:0,face:1,t:0,sitX:230};
-const ACH=['explorer','collector','debugger','friend','secret','traveler','polyglot','speedrun'];let achs=new Set(),playTime=0,langsPlayed=new Set();
+const ACH=['explorer','collector','debugger','friend','secret','traveler','polyglot','speedrun'];let achs=new Set(),playTime=0,langsPlayed=new Set(),finishT=0,bestT=0;try{bestT=+localStorage.getItem('haritiana-best')||0;}catch(e){}
+const timerEl=document.getElementById('timer');let lastTS=-1;
+function mmss(s){s=Math.floor(s);return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
+function timerUI(force){const cur=finishT||playTime;const k=Math.floor(cur)+(finishT?'f':'')+bestT+LANG;if(!force&&k===lastTS)return;lastTS=k;timerEl.innerHTML=tr('tTime')+' '+mmss(cur)+(bestT?' <em>· '+tr('tBest')+' '+mmss(bestT)+'</em>':'');timerEl.classList.toggle('done',!!finishT);}
 const tintCache={};function tinted(img,col){if(tintCache[col])return tintCache[col];const c=document.createElement('canvas');c.width=img.width;c.height=img.height;const g=c.getContext('2d');g.drawImage(img,0,0);const d=g.getImageData(0,0,c.width,c.height);const r=parseInt(col.slice(1,3),16),gg=parseInt(col.slice(3,5),16),bb=parseInt(col.slice(5,7),16);const lim=c.width*Math.floor(c.height*0.5)*4;for(let i=0;i<lim;i+=4){const R=d.data[i],G=d.data[i+1],B=d.data[i+2];const mx=Math.max(R,G,B),mn=Math.min(R,G,B);if(d.data[i+3]>0&&mx>140&&mx-mn<45){const l=mx/255;d.data[i]=r*l;d.data[i+1]=gg*l;d.data[i+2]=bb*l;}}g.putImageData(d,0,0);tintCache[col]=c;return c;}
 const keys={left:false,right:false,jump:false,act:false};
 let actQ=false,jumpQ=false,started=false,paused=false,camX=0,camT=0,found=new Set(),commits=0,squashed=0,near=null,t=0,parts=[];
@@ -377,7 +392,7 @@ const mapEl=document.getElementById('map');const mapDots=[];let meEl=null;
 (function buildMap(){ZX.slice(1).forEach((x)=>{const s=document.createElement('i');s.className='seg';s.style.left=(x/WORLD*100).toFixed(2)+'%';mapEl.appendChild(s);});INTER.concat([secret]).forEach((o)=>{const d=document.createElement('i');d.className='dot'+(o===secret?' sec':'');d.style.left=(o.x/WORLD*100).toFixed(2)+'%';mapEl.appendChild(d);mapDots.push([o,d]);});meEl=document.createElement('i');meEl.className='me';mapEl.appendChild(meEl);ZX.forEach((x,i)=>{const b=document.createElement('button');b.type='button';b.className='zbtn';const x2=i<ZX.length-1?ZX[i+1]:WORLD;b.style.left=(x/WORLD*100).toFixed(2)+'%';b.style.width=((x2-x)/WORLD*100).toFixed(2)+'%';b.dataset.z=i;b.addEventListener('click',()=>travel(i));mapEl.appendChild(b);});})();
 function mapAria(){mapEl.querySelectorAll('.zbtn').forEach((b)=>b.setAttribute('aria-label',tr('goTo')+tr('zones')[+b.dataset.z]));}
 function travel(i){if(!panel.hidden||!endEl.hidden)return;if(!started)start();const tx=i===0?140:ZX[i]+70;burst(hero.x,hero.y-40,'#FFC46B',16);hero.x=tx;hero.y=GY;hero.vx=0;hero.vy=0;hero.face=1;camX=camT=Math.max(0,Math.min(WORLD-W,hero.x-W*0.38+30));if(lemur.joined){lemur.x=tx-50;lemur.y=GY;}burst(hero.x,hero.y-40,'#6FE3C1',20);SFX.unlock();toast(tr('tTravel'));award('traveler');save();}
-function hud(){xpbar.style.width=(found.size/INTER.length*100).toFixed(0)+'%';xptxt.textContent=found.size+'/'+INTER.length;coinsEl.textContent=tr('commits')+' '+commits+'/'+coins.length;mapDots.forEach((p)=>{const on=p[0]===secret?secret.open:found.has(p[0].id);p[1].classList.toggle('on',on);});}
+function hud(){timerUI(true);xpbar.style.width=(found.size/INTER.length*100).toFixed(0)+'%';xptxt.textContent=found.size+'/'+INTER.length;coinsEl.textContent=tr('commits')+' '+commits+'/'+coins.length;mapDots.forEach((p)=>{const on=p[0]===secret?secret.open:found.has(p[0].id);p[1].classList.toggle('on',on);});}
 let zoneName='',meLeft=-1;
 function panelHTML(o){
 if(o.type==='welcome')return '<p class="tag" style="color:var(--gold)">'+esc(tr('wTag'))+'</p><h2 id="ptitle">'+esc(tr('wTitle'))+'</h2><p>'+esc(tr('wP1'))+'</p><p>'+esc(tr('wP2'))+'</p><p>'+esc(tr('wP3'))+'</p><div class="row">'+cvButtons()+'</div>';
@@ -386,7 +401,7 @@ if(o.type==='nona')return '<p class="tag" style="color:var(--cyan)">'+esc(tr('nT
 if(o.type==='chest'){const q=o.q;return '<p class="tag" style="color:'+q.col+'">'+esc(tr('quest'))+' · '+esc(L(q.tag))+'</p><h2 id="ptitle">'+esc(L(q.title))+'</h2><p>'+esc(L(q.text))+'</p>'+galHTML(q.gal);}
 if(o.type==='arcade')return '<p class="tag" style="color:var(--sky)">'+esc(tr('aTag'))+'</p><h2 id="ptitle">Bug Runner</h2><p>'+esc(tr('aP1'))+'</p><p>'+esc(tr('aP2'))+'</p><div class="nums"><div class="num"><b style="color:var(--coral)">'+squashed+'/'+bugs.length+'</b><span>'+esc(tr('fixed'))+'</span></div><div class="num"><b style="color:var(--gold)">'+commits+'/'+coins.length+'</b><span>'+esc(tr('gotCommits'))+'</span></div></div>';
 if(o.type==='flag'){const s=o.s;return '<p class="tag" style="color:'+s.col+'">'+esc(tr('journey'))+' · '+esc(L(s.when))+'</p><h2 id="ptitle">'+esc(L(s.title))+'</h2><p>'+esc(L(s.text))+'</p>';}
-if(o.type==='mail')return '<p class="tag" style="color:var(--coral)">'+esc(tr('mTag'))+'</p><h2 id="ptitle">'+esc(tr('mTitle'))+'</h2><p>'+esc(fmt(tr('mText'),{f:found.size,n:INTER.length,c:commits}))+'</p><div class="row"><a class="btn primary" href="mailto:'+EMAIL+'">'+EMAIL+'</a><a class="btn" href="'+GH+'">GitHub</a><a class="btn" href="'+LI+'">LinkedIn</a>'+cvButtons()+'</div>';
+if(o.type==='mail')return '<p class="tag" style="color:var(--coral)">'+esc(tr('mTag'))+'</p><h2 id="ptitle">'+esc(tr('mTitle'))+'</h2><p>'+esc(fmt(tr('mText'),{f:found.size+(found.has(o.id)?0:1),n:INTER.length,c:commits}))+'</p><form class="cform" id="cform" novalidate><label>'+esc(tr('fName'))+'<input name="name" required autocomplete="name" maxlength="80"></label><label>'+esc(tr('fEmail'))+'<input name="email" type="email" required autocomplete="email" maxlength="120"></label><label>'+esc(tr('fMsg'))+'<textarea name="message" rows="4" required maxlength="3000"></textarea></label><input class="hp" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn primary" type="submit">'+esc(tr('fSend'))+'</button><p class="fmsg" role="status" aria-live="polite"></p></form><p style="margin:10px 0 0;color:var(--muted)">'+esc(tr('fOr'))+'</p><div class="row"><a class="btn" href="mailto:'+EMAIL+'">'+EMAIL+'</a><a class="btn" href="'+GH+'">GitHub</a><a class="btn" href="'+LI+'">LinkedIn</a>'+cvButtons()+'</div>';
 if(o.type==='secret')return '<p class="tag" style="color:var(--pink)">'+esc(tr('sTag'))+'</p><h2 id="ptitle">'+esc(tr('sTitle'))+'</h2><p>'+esc(tr('sText'))+'</p>'+factsHTML()+'<div class="nums"><div class="num"><b style="color:var(--gold)">'+commits+'/'+coins.length+'</b><span>'+esc(tr('gotCommits'))+'</span></div><div class="num"><b style="color:var(--coral)">'+squashed+'/'+bugs.length+'</b><span>'+esc(tr('fixed'))+'</span></div></div>';
 return '';}
 const panel=document.getElementById('panel'),pbody=document.getElementById('pbody'),pclose=document.getElementById('pclose');let lastFocus=null,openObj=null;
@@ -394,7 +409,10 @@ function openPanel(o){openObj=o;pbody.innerHTML=panelHTML(o);panel.hidden=false;
 if((o.type==='chest'||o.type==='secret')&&!o.open){o.open=true;o.ot=0;if(o.type==='secret'){SFX.open();save();hud();}}
 if(o.type!=='secret'&&!found.has(o.id)){found.add(o.id);hud();SFX.open();save();burst(o.x,(o.y||GY)-40,'#6FE3C1',14);}}
 function closePanel(){panel.hidden=true;paused=false;openObj=null;keys.act=false;if(lastFocus&&lastFocus.focus)lastFocus.focus();if(found.size===INTER.length&&!doneShown){doneShown=true;save();showEnd();}}
-pclose.addEventListener('click',closePanel);panel.addEventListener('click',(e)=>{if(e.target===panel)closePanel();});
+pclose.addEventListener('click',closePanel);panel.addEventListener('submit',(e)=>{const f=e.target;if(f.id!=='cform')return;e.preventDefault();const msg=f.querySelector('.fmsg');const btn=f.querySelector('button[type=submit]');const fd=new FormData(f);if(fd.get('_gotcha'))return;const bad=[...f.querySelectorAll('input[required],textarea[required]')].find((i)=>!i.checkValidity());msg.className='fmsg';if(bad){bad.reportValidity();bad.focus();return;}const name=String(fd.get('name')).trim(),mail=String(fd.get('email')).trim(),text=String(fd.get('message')).trim();
+const viaMail=()=>{location.href='mailto:'+EMAIL+'?subject='+encodeURIComponent('Portfolio · '+name)+'&body='+encodeURIComponent(text+'\n\n'+name+' <'+mail+'>');msg.textContent=tr('fMailto');msg.classList.add('ok');};
+if(!FORMSPREE){viaMail();return;}btn.disabled=true;msg.textContent=tr('fSending');fetch('https://formspree.io/f/'+FORMSPREE,{method:'POST',headers:{Accept:'application/json'},body:fd}).then((r)=>{if(!r.ok)throw 0;f.reset();msg.textContent=tr('fOk');msg.classList.add('ok');SFX.coin();}).catch(()=>{msg.textContent=tr('fErr');msg.classList.add('err');}).finally(()=>{btn.disabled=false;});});
+panel.addEventListener('click',(e)=>{if(e.target===panel)closePanel();});
 let actx=null,muted=false;try{muted=localStorage.getItem('haritiana-mute')==='1';}catch(e){}
 function audio(){if(!actx){try{actx=new (window.AudioContext||window.webkitAudioContext)();}catch(e){}}if(actx&&actx.state==='suspended')actx.resume();}
 function tone(f1,f2,dur,type,vol,delay){if(muted||!actx)return;const t0=actx.currentTime+(delay||0);const o=actx.createOscillator(),g=actx.createGain();o.type=type||'square';o.frequency.setValueAtTime(f1,t0);o.frequency.exponentialRampToValueAtTime(Math.max(30,f2),t0+dur);g.gain.setValueAtTime(vol||0.06,t0);g.gain.exponentialRampToValueAtTime(0.0001,t0+dur);o.connect(g);g.connect(actx.destination);o.start(t0);o.stop(t0+dur+0.02);}
@@ -413,12 +431,12 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)musicStop()
 const sndBtn=document.getElementById('snd');function sndUI(){sndBtn.textContent=tr(muted?'sndOff':'sndOn');sndBtn.setAttribute('aria-pressed',muted?'false':'true');}
 sndBtn.addEventListener('click',()=>{muted=!muted;try{localStorage.setItem('haritiana-mute',muted?'1':'0');}catch(e){}sndUI();if(!muted){audio();SFX.coin();}});
 const SK='haritiana-portfolio-v1';
-function save(){try{localStorage.setItem(SK,JSON.stringify({f:[...found],c:coins.map((c)=>c.got?1:0),b:bugs.map((b)=>b.alive?1:0),cm:commits,sq:squashed,x:Math.round(hero.x),d:doneShown,so:secret.open,a:[...achs],pt:Math.round(playTime),lm:lemur.joined,lp:[...langsPlayed]}));}catch(e){}}
-function load(){try{const d=JSON.parse(localStorage.getItem(SK)||'null');if(!d)return false;(d.f||[]).forEach((id)=>{const o=objs[id];if(o&&!o.deco){found.add(id);if(o.type==='chest'){o.open=true;o.ot=1;}}});(d.c||[]).forEach((v,i)=>{if(coins[i]&&v)coins[i].got=true;});(d.b||[]).forEach((v,i)=>{if(bugs[i]&&!v)bugs[i].alive=false;});commits=coins.filter((c)=>c.got).length;squashed=d.sq||0;if(d.so){secret.open=true;secret.ot=1;}(d.a||[]).forEach((k)=>achs.add(k));playTime=d.pt||0;if(d.lm){lemur.joined=true;}(d.lp||[]).forEach((l)=>langsPlayed.add(l));if(d.x)hero.x=Math.max(120,Math.min(WORLD-40,d.x));camX=camT=Math.max(0,Math.min(WORLD-W,hero.x-W*0.38));doneShown=!!d.d;return found.size>0||commits>0||hero.x>200;}catch(e){return false;}}
-function resetGame(){found.clear();coins.forEach((c)=>c.got=false);bugs.forEach((b)=>{b.alive=true;b.sq=0;});objs.forEach((o)=>{if(o.type==='chest'){o.open=false;o.ot=0;}});secret.open=false;secret.ot=0;achs.clear();playTime=0;lemur.joined=false;lemur.x=lemur.sitX;langsPlayed.clear();langsPlayed.add(LANG);commits=0;squashed=0;hero.x=120;hero.y=GY;hero.vx=0;hero.vy=0;camX=camT=0;doneShown=false;hud();save();}
+function save(){try{localStorage.setItem(SK,JSON.stringify({f:[...found],c:coins.map((c)=>c.got?1:0),b:bugs.map((b)=>b.alive?1:0),cm:commits,sq:squashed,x:Math.round(hero.x),d:doneShown,so:secret.open,a:[...achs],pt:Math.round(playTime),ft:Math.round(finishT),lm:lemur.joined,lp:[...langsPlayed]}));}catch(e){}}
+function load(){try{const d=JSON.parse(localStorage.getItem(SK)||'null');if(!d)return false;(d.f||[]).forEach((id)=>{const o=objs[id];if(o&&!o.deco){found.add(id);if(o.type==='chest'){o.open=true;o.ot=1;}}});(d.c||[]).forEach((v,i)=>{if(coins[i]&&v)coins[i].got=true;});(d.b||[]).forEach((v,i)=>{if(bugs[i]&&!v)bugs[i].alive=false;});commits=coins.filter((c)=>c.got).length;squashed=d.sq||0;if(d.so){secret.open=true;secret.ot=1;}(d.a||[]).forEach((k)=>achs.add(k));playTime=d.pt||0;finishT=d.ft||0;if(d.lm){lemur.joined=true;}(d.lp||[]).forEach((l)=>langsPlayed.add(l));if(d.x)hero.x=Math.max(120,Math.min(WORLD-40,d.x));camX=camT=Math.max(0,Math.min(WORLD-W,hero.x-W*0.38));doneShown=!!d.d;return found.size>0||commits>0||hero.x>200;}catch(e){return false;}}
+function resetGame(){found.clear();coins.forEach((c)=>c.got=false);bugs.forEach((b)=>{b.alive=true;b.sq=0;});objs.forEach((o)=>{if(o.type==='chest'){o.open=false;o.ot=0;}});secret.open=false;secret.ot=0;achs.clear();playTime=0;finishT=0;lemur.joined=false;lemur.x=lemur.sitX;langsPlayed.clear();langsPlayed.add(LANG);commits=0;squashed=0;hero.x=120;hero.y=GY;hero.vx=0;hero.vy=0;camX=camT=0;doneShown=false;hud();save();}
 window.addEventListener('pagehide',()=>{if(started)save();});
 const endEl=document.getElementById('end');
-function showEnd(){document.getElementById('endStats').innerHTML='<div class="num"><b style="color:var(--mint)">'+found.size+'/'+INTER.length+'</b><span>'+esc(tr('found'))+'</span></div><div class="num"><b style="color:var(--gold)">'+commits+'/'+coins.length+'</b><span>'+esc(tr('gotCommits'))+'</span></div><div class="num"><b style="color:var(--coral)">'+squashed+'/'+bugs.length+'</b><span>'+esc(tr('fixed'))+'</span></div>';document.getElementById('achHead').textContent=tr('achTitle')+' · '+fmt(tr('achCount'),{n:achs.size,t:ACH.length});document.getElementById('endAchs').innerHTML=achHTML();endEl.hidden=false;paused=true;SFX.done();document.getElementById('endClose').focus();}
+function showEnd(){document.getElementById('endStats').innerHTML='<div class="num"><b style="color:var(--mint)">'+found.size+'/'+INTER.length+'</b><span>'+esc(tr('found'))+'</span></div><div class="num"><b style="color:var(--gold)">'+commits+'/'+coins.length+'</b><span>'+esc(tr('gotCommits'))+'</span></div><div class="num"><b style="color:var(--coral)">'+squashed+'/'+bugs.length+'</b><span>'+esc(tr('fixed'))+'</span></div><div class="num"><b style="color:var(--cyan)">'+mmss(finishT||playTime)+'</b><span>'+esc(tr('timeLbl'))+(bestT?' · '+esc(tr('bestLbl'))+' '+mmss(bestT):'')+'</span></div>';document.getElementById('achHead').textContent=tr('achTitle')+' · '+fmt(tr('achCount'),{n:achs.size,t:ACH.length});document.getElementById('endAchs').innerHTML=achHTML();endEl.hidden=false;paused=true;SFX.done();document.getElementById('endClose').focus();}
 function hideEnd(){endEl.hidden=true;paused=false;}
 document.getElementById('endClose').addEventListener('click',hideEnd);
 document.getElementById('endRestart').addEventListener('click',()=>{resetGame();hideEnd();});
@@ -461,7 +479,7 @@ parts=parts.filter((p)=>{p.life-=dt;p.x+=p.vx;p.y+=p.vy;p.vy+=0.25;return p.life
 bugs.forEach((b)=>{if(!b.alive){b.sq-=dt;return;}b.x+=b.dir*0.6;if(b.x<b.a){b.x=b.a;b.dir=1;}if(b.x>b.b){b.x=b.b;b.dir=-1;}});
 NPCS.forEach((n)=>{const d=Math.abs(hero.x-n.x);const nr=started&&d<110;if(nr&&!n.near){n.chars=0;n.t=0;}n.near=nr;if(nr){n.chars+=dt*38;n.t+=dt;const line=tr(n.lines)[n.li%tr(n.lines).length];if(n.t>Math.max(2.6,line.length/38+1.8)){n.li++;n.chars=0;n.t=0;}}});
 if(!started||paused){actQ=false;jumpQ=false;return;}
-playTime+=dt;
+playTime+=dt;timerUI();
 const acc=0.55,max=3.4;
 if(keys.left){hero.vx=Math.max(hero.vx-acc,-max);hero.face=-1;}else if(keys.right){hero.vx=Math.min(hero.vx+acc,max);hero.face=1;}else{hero.vx*=hero.ground?0.72:0.92;if(Math.abs(hero.vx)<0.05)hero.vx=0;}
 if(jumpQ&&hero.ground){SFX.jump();hero.vy=-12;hero.ground=false;burst(hero.x,GY,'#B98C5E',6);}
@@ -477,7 +495,7 @@ bugs.forEach((b)=>{if(!b.alive)return;const dx=hero.x-b.x;if(Math.abs(dx)<30&&he
 coins.forEach((c)=>{if(c.got)return;const dx=hero.x-c.x,dy=(hero.y-40)-c.y;if(dx*dx+dy*dy<30*30){c.got=true;commits++;hud();SFX.coin();save();burst(c.x,c.y,'#FFC46B',10);if(unlocked()){setTimeout(()=>{SFX.unlock();toast(tr('tSecret'));},350);}}});
 near=null;let best=1e9;INTER.concat([secret]).forEach((o)=>{const oy=o.y||GY;const d=Math.abs(hero.x-o.x);if(d<o.r&&Math.abs(hero.y-oy)<60&&d<best){best=d;near=o;}});if(near&&near!==lastNear)hero.waveT=1;if(!near)hero.waveT=0;lastNear=near;if(hero.waveT>0&&Math.abs(hero.vx)<=0.3&&hero.ground)hero.waveT-=dt;saveT+=dt;if(saveT>2){saveT=0;save();}
 if(actQ&&near){if(near===secret&&!unlocked()){toast(fmt(tr('tLocked'),{n:coins.length,c:commits}));SFX.hurt();}else openPanel(near);}actQ=false;jumpQ=false;
-updLemur(dt);checkAch();if(found.size>=INTER.length&&playTime<180)award('speedrun');
+updLemur(dt);checkAch();if(found.size>=INTER.length&&!finishT){finishT=Math.max(1,playTime);if(!bestT||finishT<bestT){const had=bestT;bestT=finishT;try{localStorage.setItem('haritiana-best',String(Math.round(bestT)));}catch(e){}if(had)toast(fmt(tr('newBest'),{t:mmss(bestT)}));}save();}if(found.size>=INTER.length&&finishT<180)award('speedrun');
 let zi=0;ZX.forEach((z,i)=>{if(hero.x>=z)zi=i;});const zn=tr('zones')[zi];if(zn!==zoneName){zoneName=zn;zoneEl.textContent=zn;}
 const ml=(hero.x/WORLD*100);if(Math.abs(ml-meLeft)>0.15){meLeft=ml;meEl.style.left=ml.toFixed(2)+'%';}
 camT=Math.max(0,Math.min(WORLD-W,hero.x-W*0.38+hero.face*30));camX+=(camT-camX)*(reduce?1:0.1);}
