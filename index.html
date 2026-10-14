@@ -470,6 +470,7 @@ mobile:[['nona-start',{fr:'Nona : écran de bienvenue',en:'Nona: welcome screen'
 design:[['design-sakafo',{fr:'Flyer pour un événement culinaire',en:'Flyer for a food event'}],['design-food',{fr:'Menu illustré',en:'Illustrated menu'}],['design-backers',{fr:'Logo Bakers Kitchen',en:'Bakers Kitchen logo'}],['design-amfashion',{fr:'Logo AM Fashion',en:'AM Fashion logo'}],['design-illu',{fr:'Autoportrait en illustration vectorielle',en:'Vector self-portrait'}]],
 photo:[['photo-1',{fr:'Portrait mis en scène, retouché sur Lightroom et Photoshop',en:'Staged portrait, retouched in Lightroom and Photoshop'}]],
 uiux:[['uiux-login',{fr:'App de recrutement : connexion',en:'Recruitment app: sign in'}],['uiux-type',{fr:'Choix du type de compte',en:'Choosing an account type'}],['uiux-home',{fr:'Accueil avec les offres',en:'Home with job offers'}],['uiux-detail',{fr:'Détail d’une offre',en:'Job offer details'}],['uiux-candidates',{fr:'Gestion des candidats',en:'Managing candidates'}],['uiux-dashboard',{fr:'Tableau de bord',en:'Dashboard'}]]};
+const MTC=new Map();const _mt=CanvasRenderingContext2D.prototype.measureText;CanvasRenderingContext2D.prototype.measureText=function(x){const k=this.font+'|'+x;let r=MTC.get(k);if(!r){r=_mt.call(this,x);if(MTC.size<3000)MTC.set(k,r);}return r;};if(document.fonts)document.fonts.addEventListener('loadingdone',()=>MTC.clear());
 let LANG='fr';try{const s=localStorage.getItem('haritiana-lang');if(s==='fr'||s==='en')LANG=s;else if(!/^fr/i.test(navigator.language||'fr'))LANG='en';}catch(e){}
 const tr=(k)=>T[LANG][k]!==undefined?T[LANG][k]:T.fr[k];
 const L=(v)=>(v&&typeof v==='object'&&!Array.isArray(v)&&'fr' in v)?v[LANG]:v;
@@ -477,8 +478,9 @@ const fmt=(s,o)=>s.replace(/\{(\w+)\}/g,(m,k)=>o[k]);
 const esc=(t)=>String(t).replace(/[&<>"]/g,(c)=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const cvHref=()=>LANG==='en'?CVEN:CVFR;
 const cvButtons=()=>LANG==='en'?'<a class="btn" href="'+CVEN+'" target="_blank" rel="noopener">Resume (EN)</a><a class="btn" href="'+CVFR+'" target="_blank" rel="noopener">CV (FR)</a>':'<a class="btn" href="'+CVFR+'" target="_blank" rel="noopener">CV (FR)</a><a class="btn" href="'+CVEN+'" target="_blank" rel="noopener">Resume (EN)</a>';
+function thumbSrc(n){return n.indexOf('.')>0?'img/'+n:'img/t/'+n+'.webp';}
 function imgSrc(n){return 'img/'+(n.indexOf('.')>0?n:n+'.webp');}
-function galHTML(key){const g=GAL[key];if(!g)return '';return '<div class="gal">'+g.map((it,i)=>'<button type="button" data-gal="'+key+'" data-i="'+i+'" aria-label="'+esc(tr('zoom')+L(it[1]))+'"><img src="'+imgSrc(it[0])+'" alt="'+esc(L(it[1]))+'" loading="lazy" decoding="async" fetchpriority="low"></button>').join('')+'</div>';}
+function galHTML(key){const g=GAL[key];if(!g)return '';return '<div class="gal">'+g.map((it,i)=>'<button type="button" data-gal="'+key+'" data-i="'+i+'" aria-label="'+esc(tr('zoom')+L(it[1]))+'"><img src="'+thumbSrc(it[0])+'" alt="'+esc(L(it[1]))+'" loading="lazy" decoding="async" fetchpriority="low"></button>').join('')+'</div>';}
 function statsHTML(m){return m.stats.map((s)=>{const n=typeof s[1]==='number';const v=L(s[1]);return '<div class="stat"><span>'+esc(L(s[0]))+'</span><span class="bar"><i style="width:'+(n?s[1]:100)+'%;background:'+(n?m.col:'repeating-linear-gradient(90deg,'+m.col+' 0 6px,transparent 6px 10px)')+'"></i></span><span style="font-family:var(--pixel);font-size:12px;color:var(--muted)">'+(n?s[1]+'%':(v?esc(v):'pro'))+'</span></div>';}).join('');}
 const numsHTML=()=>NUMS.map((n)=>'<div class="num"><b style="color:'+n[3]+'">'+n[0]+n[1]+'</b><span>'+esc(L(n[2]))+'</span></div>').join('');
 const stackHTML=()=>'<div class="chips">'+STACK.map((c)=>'<span class="chip">'+esc(c)+'</span>').join('')+'</div>';
